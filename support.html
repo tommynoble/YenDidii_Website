@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support - YenDidii</title>
+    <meta name="description" content="Get help and support for the YenDidii app.">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo-group">
+                <div class="logo-icon">Y</div>
+                <span class="logo-text">Yen<span>Didii</span></span>
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html#eaters" class="nav-link">For Eaters</a></li>
+                    <li><a href="index.html#cooks" class="nav-link">For Cooks</a></li>
+                    <li><a href="index.html#map-explore" class="nav-link">Explore Map</a></li>
+                    <li><a href="support.html" class="nav-link" style="color: var(--primary);">Support</a></li>
+                    <li><a href="privacy-policy.html" class="nav-link">Privacy Policy</a></li>
+                    <li><a href="index.html#download" class="nav-btn">Download App</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="legal-container">
+        <div class="legal-card">
+            <h1>App Support</h1>
+            <p class="legal-meta">We're here to help you get the most out of YenDidii.</p>
+            
+            <div class="legal-content">
+                <h2>Get in Touch</h2>
+                <p>Have questions about ordering, registering as a cook, or managing payments? Fill out the form below, and our support team will get back to you within 24 hours.</p>
+                
+                <form class="support-form" onsubmit="event.preventDefault(); alert('Message sent successfully! Thank you for contacting YenDidii Support.');">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="first-name">First Name</label>
+                            <input type="text" id="first-name" required placeholder="Thomas">
+                        </div>
+                        <div class="form-group">
+                            <label for="last-name">Last Name</label>
+                            <input type="text" id="last-name" required placeholder="Cook">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" required placeholder="thomas@example.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="role">My Account Type</label>
+                        <input type="text" id="role" placeholder="E.g., Cook / Eater" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Describe your issue or question</label>
+                        <textarea id="message" rows="6" required placeholder="How can we help you? Please specify details if you have transaction issues..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary" style="border: none; width: 100%; justify-content: center; cursor: pointer;">
+                        Send Support Ticket
+                    </button>
+                </form>
+
+                <h2 style="margin-top: 3rem;">Frequently Asked Questions</h2>
+                
+                <h3>How do I switch to Kitchen Mode?</h3>
+                <p>Go to your Profile tab in the bottom right, and tap "Switch to Kitchen Mode". Once in Kitchen Mode, you can add dishes to your menu and open your kitchen to receive orders from eaters nearby.</p>
+                
+                <h3>How do I receive payments?</h3>
+                <p>We use Paystack to process transactions. Once you list a dish and open a session, eaters can pay directly in the app. Funds are credited directly to your registered bank account or mobile money wallet.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <div class="footer-logo-row">
+                    <div class="footer-logo-circle"><img src="assets/logo.png" alt="YenDidii Logo"></div>
+                    <h3>Yen<span>Didii</span></h3>
+                </div>
+                <p>The premier foodsharing marketplace connecting passionate home cooks and local food lovers in Ghana and beyond.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Explore</h4>
+                <ul>
+                    <li><a href="index.html#eaters">For Eaters</a></li>
+                    <li><a href="index.html#cooks">For Cooks</a></li>
+                    <li><a href="index.html#map-explore">Map View</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Legal & Support</h4>
+                <ul>
+                    <li><a href="support.html">Contact Support</a></li>
+                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 YenDidii. All rights reserved.</p>
+            <p>Made with love for the local community.</p>
+        </div>
+    </footer>
+</body>
+</html>
