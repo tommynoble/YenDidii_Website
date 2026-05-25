@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YenDidii Cook Academy — Interactive Training Portal</title>
+    <meta name="description" content="Interactive food safety and hosting training for YenDidii cooks in Ghana.">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        /* Modern Premium Academy styling */
+        :root {
+            --academy-dark: #090d16;
+            --academy-card: rgba(22, 30, 49, 0.7);
+            --academy-sidebar-bg: #0f172a;
+            --academy-border: rgba(255, 255, 255, 0.08);
+            --academy-border-active: rgba(224, 93, 54, 0.4);
+            --academy-text: #f1f5f9;
+            --academy-muted: #94a3b8;
+            --academy-glow: rgba(224, 93, 54, 0.15);
+        }
+
+        body.academy-mode {
+            background-color: var(--academy-dark);
+            color: var(--academy-text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Ambient background glow points */
+        body.academy-mode::before {
+            content: '';
+            position: absolute;
+            top: 20%; left: -10%;
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(224,93,54,0.06) 0%, transparent 70%);
+            filter: blur(60px);
+            pointer-events: none;
+            z-index: 0;
+        }
+        body.academy-mode::after {
+            content: '';
+            position: absolute;
+            bottom: 10%; right: -10%;
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(255,179,0,0.04) 0%, transparent 70%);
+            filter: blur(50px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .academy-navbar {
+            background: rgba(9, 13, 22, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--academy-border);
+            padding: 1.2rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .academy-nav-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .academy-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .academy-logo-icon {
+            background: linear-gradient(135deg, var(--primary) 0%, #ff7849 100%);
+            width: 34px;
+            height: 34px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 800;
+            box-shadow: 0 4px 15px rgba(224, 93, 54, 0.3);
+        }
+
+        .academy-brand span {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: -0.02em;
+        }
+
+        .academy-brand span span {
+            color: var(--primary);
+        }
+
+        .academy-user-status {
+            font-size: 0.85rem;
+            color: var(--academy-muted);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .btn-sync-header {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--academy-border);
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-sync-header:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Layout Grid */
+        .academy-layout {
+            max-width: 1280px;
+            margin: 2.5rem auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 340px 1fr;
+            gap: 3rem;
+            flex: 1;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Sidebar styling */
+        .academy-sidebar {
+            background: var(--academy-sidebar-bg);
+            border: 1px solid var(--academy-border);
+            border-radius: var(--radius-lg);
+            padding: 2.2rem;
+            height: fit-content;
+            position: sticky;
+            top: 7rem;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .progress-widget {
+            margin-bottom: 2.2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--academy-border);
+            text-align: center;
+        }
+
+        .progress-ring-container {
+            position: relative;
+            width: 130px;
+            height: 130px;
+            margin: 0 auto 1.2rem;
+        }
+
+        .progress-text {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .progress-text .percentage {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #fff;
+            line-height: 1;
+            background: linear-gradient(135deg, #fff 40%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .progress-text .label {
+            font-size: 0.7rem;
+            color: var(--academy-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-top: 0.3rem;
+        }
+
+        .module-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            list-style: none;
+        }
+
+        .module-item {
+            padding: 1rem 1.2rem;
+            border-radius: var(--radius-md);
+            border: 1px solid transparent;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 0.92rem;
+            color: var(--academy-muted);
+            background: rgba(255,255,255,0.01);
+        }
+
+        .module-item:hover {
+            background: rgba(255, 255, 255, 0.03);
+            color: #fff;
+        }
+
+        .module-item.active {
+            background: rgba(224, 93, 54, 0.08);
+            border-color: var(--academy-border-active);
+            color: #ff7849;
+            font-weight: 600;
+            box-shadow: 0 4px 20px rgba(224, 93, 54, 0.05);
+        }
+
+        .module-item.completed {
+            color: #4caf50;
+            background: rgba(76, 175, 80, 0.03);
+        }
+
+        .module-item .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #334155;
+            flex-shrink: 0;
+            transition: all 0.2s;
+            border: 2px solid transparent;
+        }
+
+        .module-item.active .dot {
+            background: var(--primary);
+            box-shadow: 0 0 10px var(--primary);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .module-item.completed .dot {
+            background: #4caf50;
+            box-shadow: 0 0 8px rgba(76, 175, 80, 0.3);
+        }
+
+        /* Content area styling */
+        .academy-content-card {
+            background: var(--academy-card);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--academy-border);
+            border-radius: var(--radius-lg);
+            padding: 3.5rem;
+            position: relative;
+            min-height: 580px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .module-content-view {
+            display: none;
+        }
+
+        .module-content-view.active {
+            display: block;
+            animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .module-content-view h2 {
+            font-size: 2.4rem;
+            color: #fff;
+            margin-bottom: 1.8rem;
+            line-height: 1.25;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+
+        .module-content-view p {
+            font-size: 1.1rem;
+            color: #cbd5e1;
+            margin-bottom: 1.8rem;
+            line-height: 1.75;
+        }
+
+        .module-content-view ul {
+            list-style: none;
+            margin-bottom: 2.2rem;
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: var(--radius-md);
+            padding: 1.8rem 2rem;
+        }
+
+        .module-content-view ul li {
+            position: relative;
+            padding-left: 2.2rem;
+            margin-bottom: 1.2rem;
+            font-size: 1.05rem;
+            color: #e2e8f0;
+            line-height: 1.6;
+        }
+
+        .module-content-view ul li:last-child {
+            margin-bottom: 0;
+        }
+
+        .module-content-view ul li::before {
+            content: '➔';
+            position: absolute;
+            left: 0;
+            top: 0.1rem;
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 0.95rem;
+        }
+
+        .badge-ghana {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: rgba(224, 93, 54, 0.12);
+            color: #ff7849;
+            border: 1px solid rgba(224, 93, 54, 0.25);
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            padding: 0.4rem 1rem;
+            margin-bottom: 1.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .academy-navigation-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 3.5rem;
+            padding-top: 2.2rem;
+            border-top: 1px solid var(--academy-border);
+        }
+
+        .btn-academy {
+            padding: 0.9rem 1.8rem;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            font-family: inherit;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            transition: all 0.25s;
+            border: 1px solid transparent;
+        }
+
+        .btn-academy-prev {
+            background: transparent;
+            color: var(--academy-muted);
+            border-color: var(--academy-border);
+        }
+
+        .btn-academy-prev:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.03);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .btn-academy-next {
+            background: linear-gradient(135deg, var(--primary) 0%, #ff7849 100%);
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(224, 93, 54, 0.2);
+        }
+
+        .btn-academy-next:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(224, 93, 54, 0.35);
+        }
+
+        .btn-academy-completed {
+            background: linear-gradient(135deg, #2e7d32 0%, #4caf50 100%);
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(46, 125, 50, 0.2);
+        }
+
+        /* Quiz styles */
+        .quiz-intro {
+            text-align: center;
+            max-width: 580px;
+            margin: 3rem auto;
+        }
+
+        .quiz-question-container {
+            margin-bottom: 2rem;
+        }
+
+        .quiz-question-title {
+            font-size: 1.4rem;
+            color: #fff;
+            margin-bottom: 2rem;
+            font-weight: 700;
+            line-height: 1.4;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .quiz-option {
+            background: rgba(15, 23, 42, 0.4);
+            border: 1px solid var(--academy-border);
+            border-radius: var(--radius-md);
+            padding: 1.4rem;
+            cursor: pointer;
+            transition: all 0.25s;
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            color: #cbd5e1;
+            font-size: 1rem;
+        }
+
+        .quiz-option:hover {
+            border-color: var(--primary);
+            background: rgba(224, 93, 54, 0.02);
+            color: #fff;
+        }
+
+        .quiz-option.selected {
+            border-color: var(--primary);
+            background: rgba(224, 93, 54, 0.08);
+            color: #fff;
+            font-weight: 600;
+            box-shadow: 0 0 15px rgba(224,93,54,0.05);
+        }
+
+        .quiz-radio {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid #475569;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.2s;
+        }
+
+        .quiz-option.selected .quiz-radio {
+            border-color: var(--primary);
+            background: var(--primary);
+        }
+
+        .quiz-option.selected .quiz-radio::after {
+            content: '';
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #fff;
+        }
+
+        /* Modal windows */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(5, 8, 15, 0.85);
+            z-index: 10000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .sync-card {
+            background: #0f172a;
+            border: 1px solid var(--academy-border);
+            border-radius: var(--radius-lg);
+            padding: 3.5rem;
+            max-width: 500px;
+            width: 90%;
+            margin: 0 auto;
+            text-align: center;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+        .sync-card h3 {
+            color: #fff;
+            margin-bottom: 0.75rem;
+            font-size: 1.6rem;
+            font-weight: 700;
+        }
+
+        .sync-card p {
+            color: var(--academy-muted);
+            font-size: 0.95rem;
+            margin-bottom: 2.2rem;
+            line-height: 1.5;
+        }
+
+        .sync-input {
+            width: 100%;
+            padding: 1rem 1.2rem;
+            background: rgba(9, 13, 22, 0.5);
+            border: 1px solid var(--academy-border);
+            border-radius: var(--radius-md);
+            color: #fff;
+            font-size: 1.05rem;
+            margin-bottom: 1.2rem;
+            font-family: inherit;
+            transition: border-color 0.2s;
+        }
+
+        .sync-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .sync-error {
+            color: #f87171;
+            font-size: 0.88rem;
+            margin-top: 0.5rem;
+            display: none;
+            background: rgba(248, 113, 113, 0.1);
+            border: 1px solid rgba(248, 113, 113, 0.2);
+            border-radius: var(--radius-sm);
+            padding: 0.5rem 1rem;
+        }
+
+        .success-box {
+            max-width: 580px;
+            padding: 4rem 3.5rem;
+        }
+
+        .success-icon {
+            font-size: 5rem;
+            margin-bottom: 2rem;
+            animation: bounce 1s infinite alternate;
+        }
+
+        @keyframes bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-10px); }
+        }
+
+        /* footer integration */
+        .footer {
+            background: #090d16;
+            border-top: 1px solid var(--academy-border);
+            color: #64748b;
+            padding: 5rem 0 3rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        @media(max-width: 990px) {
+            .academy-layout { grid-template-columns: 1fr; }
+            .academy-sidebar { position: static; margin-bottom: 1.5rem; }
+        }
+        @media(max-width: 600px) {
+            .academy-content-card { padding: 2.2rem; }
+            .module-content-view h2 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body class="academy-mode">
+
+    <!-- Navbar -->
+    <header class="academy-navbar">
+        <div class="academy-nav-container">
+            <a href="become-cook.html" class="academy-brand">
+                <div class="academy-logo-icon">Y</div>
+                <span>Yen<span>Didii</span> Academy</span>
+            </a>
+            <div class="academy-user-status" id="header-user-status">
+                <button onclick="openSyncModal()" class="btn-sync-header">Sync Account</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Layout Grid -->
+    <main class="academy-layout">
+        
+        <!-- Sidebar -->
+        <aside class="academy-sidebar">
+            <div class="progress-widget">
+                <div class="progress-ring-container">
+                    <svg width="130" height="130" viewBox="0 0 120 120">
+                        <circle cx="60" cy="60" r="50" fill="transparent" stroke="rgba(255,255,255,0.03)" stroke-width="8"/>
+                        <circle cx="60" cy="60" r="50" fill="transparent" stroke="#E05D36" stroke-width="8" 
+                                stroke-dasharray="314.15" stroke-dashoffset="314.15" id="progress-ring-fill"
+                                transform="rotate(-90 60 60)" style="transition: stroke-dashoffset 0.4s cubic-bezier(0.4, 0, 0.2, 1);"/>
+                    </svg>
+                    <div class="progress-text">
+                        <span class="percentage" id="progress-percent-label">0%</span>
+                        <span class="label">Completed</span>
+                    </div>
+                </div>
+                <div style="font-size:0.88rem; color:var(--academy-muted); font-weight: 500;" id="progress-summary">0 of 5 completed</div>
+            </div>
+
+            <ul class="module-list">
+                <li class="module-item active" id="menu-intro" onclick="goToSlide('intro')">
+                    <span class="dot"></span> 📖 Academy Intro
+                </li>
+                <li class="module-item" id="menu-mod1" onclick="goToSlide('mod1')">
+                    <span class="dot"></span> 1. FDA Standards
+                </li>
+                <li class="module-item" id="menu-mod2" onclick="goToSlide('mod2')">
+                    <span class="dot"></span> 2. Kitchen Hygiene
+                </li>
+                <li class="module-item" id="menu-mod3" onclick="goToSlide('mod3')">
+                    <span class="dot"></span> 3. Storage &amp; Danger Zone
+                </li>
+                <li class="module-item" id="menu-mod4" onclick="goToSlide('mod4')">
+                    <span class="dot"></span> 4. Hosting &amp; Akwaaba
+                </li>
+                <li class="module-item" id="menu-mod5" onclick="goToSlide('mod5')">
+                    <span class="dot"></span> 5. Cook App Guide
+                </li>
+                <li class="module-item" id="menu-quiz" onclick="goToSlide('quiz')" style="opacity:0.4; pointer-events:none;">
+                    <span class="dot"></span> 📝 Final Quiz
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Main Content Card -->
+        <section class="academy-content-card">
+            
+            <!-- Welcome Slide -->
+            <div class="module-content-view active" id="content-intro">
+                <div class="badge-ghana">👋 Welcome</div>
+                <h2>Prepare delicious meals safely for your community</h2>
+                <p>Welcome to YenDidii Academy. This training is designed to ensure you succeed as a cook while keeping food safety and guest satisfaction at the center of your operations.</p>
+                <p>Because you are preparing meals that will be shared with neighbors and families, compliance with Ghana's food hygiene regulations is a requirement for all active hosts.</p>
+                <p><strong>Training requirements to get certified:</strong></p>
+                <ul>
+                    <li>Read through each of the 5 syllabus sections sequentially.</li>
+                    <li>Mark each section as read using the button at the bottom of the card.</li>
+                    <li>Unlock and pass the final multiple-choice assessment.</li>
+                    <li>Enter your app account phone number to verify and store your certificate.</li>
+                </ul>
+            </div>
+
+            <!-- Module 1 -->
+            <div class="module-content-view" id="content-mod1">
+                <div class="badge-ghana">🇬🇭 FDA Guidelines</div>
+                <h2>Food Safety &amp; Legal FDA Standards</h2>
+                <p>Ghana's Food and Drugs Authority (FDA) regulates commercial food preparation to protect the community under the <strong>Public Health Act 2012 (Act 851)</strong>.</p>
+                <ul>
+                    <li><strong>Food Handler Screening:</strong> All YenDidii chefs are strongly encouraged to obtain a Food Handler's Certificate from their municipal or metropolitan health office.</li>
+                    <li><strong>No Expired Ingredients:</strong> Never prepare or list dishes using expired ingredients. Always inspect labels before cooking.</li>
+                    <li><strong>Reporting Illness:</strong> If you show symptoms of foodborne illnesses, skin infections, or diarrhea, immediately pause listings and seek medical checkups.</li>
+                    <li><strong>Potable Water Sourcing:</strong> Always use clean, boiled, or sachet water for food preparation and handwashing. Do not use untreated well or borehole water.</li>
+                </ul>
+            </div>
+
+            <!-- Module 2 -->
+            <div class="module-content-view" id="content-mod2">
+                <div class="badge-ghana">🧼 Clean Kitchen</div>
+                <h2>Personal &amp; Kitchen Hygiene</h2>
+                <p>Maintaining high standards of personal and station hygiene prevents cross-contamination and illness.</p>
+                <ul>
+                    <li><strong>20-Second Rule:</strong> Wash hands with clean soap and warm running water for at least 20 seconds before starting. Repeat after handling raw meat, trash, or money.</li>
+                    <li><strong>Chef's Attire:</strong> Wear a clean kitchen apron and use a hairnet or scarf to prevent hair from falling into dishes.</li>
+                    <li><strong>Knife &amp; Surface Hygiene:</strong> Wash knives, bowls, and tables with soap and clean water immediately after cutting or preparing ingredients.</li>
+                    <li><strong>No Jewellery:</strong> Remove watches, rings, and bracelets before cooking as they trap bacteria. Keep fingernails short and unpolished.</li>
+                </ul>
+            </div>
+
+            <!-- Module 3 -->
+            <div class="module-content-view" id="content-mod3">
+                <div class="badge-ghana">❄️ Danger Zone</div>
+                <h2>Safe Storage &amp; Danger Zone</h2>
+                <p>Bacteria multiply exponentially at room temperature. Proper temperature checks keep food fresh.</p>
+                <ul>
+                    <li><strong>The Danger Zone (5°C to 60°C):</strong> Keep food above 60°C or below 5°C. Never leave cooked rice, stews, or soups at room temperature for more than 2 hours.</li>
+                    <li><strong>Reheating:</strong> Reheat leftovers thoroughly until steaming hot (above 75°C) before serving. Never reheat a dish more than once.</li>
+                    <li><strong>Raw &amp; Cooked Separation:</strong> Keep raw meats/poultry on the bottom shelves of the refrigerator to avoid raw juices dripping onto ready-to-eat foods.</li>
+                    <li><strong>Cutting Board Separation:</strong> Use separate cutting boards (plastic for raw poultry/meats, wood for vegetables) to avoid bacterial transmission.</li>
+                </ul>
+            </div>
+
+            <!-- Module 4 -->
+            <div class="module-content-view" id="content-mod4">
+                <div class="badge-ghana">🤝 Akwaaba Warmth</div>
+                <h2>Hosting Guests &amp; Hospitality</h2>
+                <p>YenDidii hosts are ambassadors of traditional Ghanaian hospitality. Dine-In guests should experience a clean, welcoming environment.</p>
+                <ul>
+                    <li><strong>The Akwaaba Welcome:</strong> Receive guests with a friendly smile, a clean seating space, and a glass of clean water.</li>
+                    <li><strong>Allergy Disclosures:</strong> Explicitly mention if you use peanuts (groundnuts), seafood, or common dairy allergens in your meals.</li>
+                    <li><strong>Spice Levels:</strong> Warn guests if your dish is highly spiced. Offer alternatives or keep extra rice/water nearby.</li>
+                    <li><strong>Reviews:</strong> Encourage eaters to rate your session in the app. Positive reviews help you stand out on the map.</li>
+                </ul>
+            </div>
+
+            <!-- Module 5 -->
+            <div class="module-content-view" id="content-mod5">
+                <div class="badge-ghana">📱 App Guide</div>
+                <h2>YenDidii Cook App Guide</h2>
+                <p>Manage your entire home kitchen restaurant directly from Cook Mode in the app.</p>
+                <ul>
+                    <li><strong>Meal Listings:</strong> Take clear, bright photographs of your food. Declare prices in GHS and specify details like portion size.</li>
+                    <li><strong>Join the Pot Sessions:</strong> Schedule dining times, set reservation deadlines, and select guest limits.</li>
+                    <li><strong>Accepting Orders:</strong> Check order notifications, tap Accept, and move progress indicators: Accepted ➔ Cooking ➔ Ready.</li>
+                    <li><strong>Paystack Payouts:</strong> Earnings are paid through secure integrations and sent directly to your Mobile Money (MoMo) account.</li>
+                </ul>
+            </div>
+
+            <!-- Quiz Slide -->
+            <div class="module-content-view" id="content-quiz">
+                <div class="badge-ghana">📝 Final Assessment</div>
+                <h2>YenDidii Academy Final Quiz</h2>
+                <div class="quiz-intro" id="quiz-intro-screen">
+                    <p>Test your knowledge before completing your training. You must score 5 out of 5 to pass. You can retake the quiz as many times as needed.</p>
+                    <button class="btn-academy btn-academy-next" onclick="startQuiz()" style="margin: 0 auto; display: inline-flex;">Start Assessment</button>
+                </div>
+
+                <div id="quiz-question-screen" style="display:none;">
+                    <div class="quiz-question-container">
+                        <div style="font-size:0.85rem; color:var(--primary); font-weight:700; margin-bottom:0.8rem; text-transform:uppercase; letter-spacing:0.05em;" id="quiz-step-indicator">Question 1 of 5</div>
+                        <div class="quiz-question-title" id="quiz-question-title">What temperature range is the "Danger Zone" where bacteria multiply fastest?</div>
+                        <div class="quiz-options" id="quiz-options-list">
+                            <!-- options added dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation Controls -->
+            <div class="academy-navigation-bar" id="academy-nav-controls">
+                <button class="btn-academy btn-academy-prev" id="btn-prev" onclick="onPrev()">← Back</button>
+                <button class="btn-academy btn-academy-next" id="btn-next" onclick="onNext()">Next Chapter →</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Sync/Login Modal -->
+    <div class="modal-overlay" id="sync-modal">
+        <div class="sync-card">
+            <h3 id="modal-title">Sync Your Account</h3>
+            <p id="modal-desc">Enter your phone number to link your progress and unlock the final certificate.</p>
+            
+            <div id="modal-phone-step">
+                <div style="display:flex; gap:0.5rem; margin-bottom:1.5rem;">
+                    <input type="text" value="+44" id="sync-prefix" style="width:75px; text-align:center;" class="sync-input" readonly>
+                    <input type="tel" id="sync-phone" placeholder="7868024799" class="sync-input" style="flex:1;">
+                </div>
+                <button class="btn-academy btn-academy-next" id="btn-send-code" onclick="sendSyncOTP()" style="width:100%;">Send Verification Code</button>
+            </div>
+
+            <div id="modal-otp-step" style="display:none;">
+                <input type="number" id="sync-otp" placeholder="123456" class="sync-input" style="text-align:center; font-size:1.6rem; letter-spacing:0.3em;">
+                <button class="btn-academy btn-academy-next" id="btn-verify-code" onclick="verifySyncOTP()" style="width:100%;">Verify &amp; Link Progress</button>
+                <button onclick="backToModalPhone()" class="btn-academy btn-academy-prev" style="width:100%; margin-top:0.75rem; font-size:0.85rem;">Use different number</button>
+            </div>
+
+            <div class="sync-error" id="sync-error-msg">Something went wrong.</div>
+            <button onclick="closeSyncModal()" class="btn-academy btn-academy-prev" style="margin-top:2rem; border:none; background:none;">Close</button>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal-overlay" id="success-modal">
+        <div class="sync-card success-box">
+            <div class="success-icon">🎖️</div>
+            <h3>YenDidii Academy Certified!</h3>
+            <p id="success-desc">Congratulations! You have scored 5/5 on the assessment quiz. Your completion status is successfully recorded to your YenDidii profile.</p>
+            <button class="btn-academy btn-academy-completed" onclick="location.href='become-cook.html'" style="margin: 0 auto; display:inline-flex;">Back to Home</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <div class="footer-logo-row">
+                    <div class="footer-logo-circle"><img src="assets/logo.png" alt="YenDidii Logo"></div>
+                    <h3>Yen<span>Didii</span></h3>
+                </div>
+                <p>The premier foodsharing marketplace connecting passionate home cooks and local food lovers in Ghana and beyond.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Explore</h4>
+                <ul>
+                    <li><a href="index.html#eaters">For Eaters</a></li>
+                    <li><a href="index.html#cooks">For Cooks</a></li>
+                    <li><a href="index.html#map-explore">Map View</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Legal &amp; Support</h4>
+                <ul>
+                    <li><a href="support.html">Contact Support</a></li>
+                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                    <li><a href="become-cook.html">Become a Cook</a></li>
+                    <li><a href="cook-training.html">Cook Training</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Partners</h4>
+                <ul>
+                    <li><a href="admin.html" style="opacity:0.5;font-size:0.85rem;">Admin Portal</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 YenDidii. All rights reserved.</p>
+            <p>Made with love for the local community.</p>
+        </div>
+    </footer>
+
+    <script type="module">
+        import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+
+        const SUPABASE_URL = 'https://cspyaqpjlvwlrtwtlpmm.supabase.co';
+        const SUPABASE_ANON_KEY = 'sb_publishable_v9hsHGAAidnXT8m5eGDDdw_FC-saVC-';
+        const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        const slides = ['intro', 'mod1', 'mod2', 'mod3', 'mod4', 'mod5', 'quiz'];
+        let activeIndex = 0;
+        let completedSlides = new Set();
+        let userProfile = null;
+        let currentQuizIndex = 0;
+        let selectedAnswers = [];
+
+        const quizQuestions = [
+            {
+                q: "What is the temperature range of the Food 'Danger Zone'?",
+                options: [
+                    "0°C to 10°C",
+                    "5°C to 60°C",
+                    "15°C to 100°C",
+                    "60°C to 100°C"
+                ],
+                ans: 1
+            },
+            {
+                q: "Under which Act are food hygiene regulations enforced in Ghana?",
+                options: [
+                    "General Health Regulation 2004",
+                    "Ghana FDA Standard Act 1999",
+                    "Public Health Act 2012 (Act 851)",
+                    "Local Assembly Code 1994"
+                ],
+                ans: 2
+            },
+            {
+                q: "How long should you wash your hands with clean running water and soap?",
+                options: [
+                    "At least 5 seconds",
+                    "At least 10 seconds",
+                    "At least 20 seconds",
+                    "At least 60 seconds"
+                ],
+                ans: 2
+            },
+            {
+                q: "What precaution must you take regarding raw meats in the kitchen?",
+                options: [
+                    "Wash meats under pipeline water to kill bacteria",
+                    "Use separate cutting boards for raw meats and vegetables",
+                    "Store raw meats on the top shelf of the refrigerator",
+                    "Cook chicken lukewarm to save gas and energy"
+                ],
+                ans: 1
+            },
+            {
+                q: "When guests book a Dine-In session, what hospitality steps should you follow?",
+                options: [
+                    "Serve meals and leave them completely alone to enjoy",
+                    "Add hot spices to every dish without notifying them",
+                    "Welcome guests warmly, offer clean water, and disclose spices/allergens",
+                    "Never ask for reviews or feedbacks on the YenDidii App"
+                ],
+                ans: 2
+            }
+        ];
+
+        window.goToSlide = (slideId) => {
+            const index = slides.indexOf(slideId);
+            if (index === -1) return;
+            
+            if (index > 0 && !completedSlides.has(slides[index - 1]) && slides[index - 1] !== 'intro') {
+                return;
+            }
+
+            activeIndex = index;
+            document.querySelectorAll('.module-content-view').forEach(v => v.classList.remove('active'));
+            document.querySelectorAll('.module-item').forEach(m => m.classList.remove('active'));
+
+            const targetView = document.getElementById(`content-${slideId}`);
+            if (targetView) targetView.classList.add('active');
+
+            const targetMenuItem = document.getElementById(`menu-${slideId}`);
+            if (targetMenuItem) targetMenuItem.classList.add('active');
+
+            updateNavigationButtons();
+            updateProgress();
+        };
+
+        window.onNext = () => {
+            const currentSlide = slides[activeIndex];
+            
+            if (currentSlide !== 'intro' && currentSlide !== 'quiz') {
+                completedSlides.add(currentSlide);
+                document.getElementById(`menu-${currentSlide}`).classList.add('completed');
+            }
+
+            if (activeIndex < slides.length - 1) {
+                if (activeIndex === 5) {
+                    const quizMenu = document.getElementById('menu-quiz');
+                    quizMenu.style.opacity = '1';
+                    quizMenu.style.pointerEvents = 'auto';
+                }
+                activeIndex++;
+                goToSlide(slides[activeIndex]);
+            }
+        };
+
+        window.onPrev = () => {
+            if (activeIndex > 0) {
+                activeIndex--;
+                goToSlide(slides[activeIndex]);
+            }
+        };
+
+        function updateNavigationButtons() {
+            const btnPrev = document.getElementById('btn-prev');
+            const btnNext = document.getElementById('btn-next');
+            const controls = document.getElementById('academy-nav-controls');
+
+            if (slides[activeIndex] === 'quiz') {
+                controls.style.display = 'none';
+                return;
+            } else {
+                controls.style.display = 'flex';
+            }
+
+            if (activeIndex === 0) {
+                btnPrev.style.visibility = 'hidden';
+            } else {
+                btnPrev.style.visibility = 'visible';
+            }
+
+            if (activeIndex === 5) {
+                btnNext.textContent = 'Unlock Final Quiz';
+            } else if (activeIndex === 0) {
+                btnNext.textContent = 'Begin Training';
+            } else {
+                btnNext.textContent = 'Mark Read & Continue →';
+            }
+        }
+
+        function updateProgress() {
+            const totalModules = 5;
+            const completedCount = completedSlides.size;
+            const percent = Math.round((completedCount / totalModules) * 100);
+
+            document.getElementById('progress-percent-label').textContent = `${percent}%`;
+            document.getElementById('progress-summary').textContent = `${completedCount} of ${totalModules} completed`;
+
+            const circumference = 314.15;
+            const offset = circumference - (completedCount / totalModules) * circumference;
+            document.getElementById('progress-ring-fill').style.strokeDashoffset = offset;
+        }
+
+        window.startQuiz = () => {
+            document.getElementById('quiz-intro-screen').style.display = 'none';
+            document.getElementById('quiz-question-screen').style.display = 'block';
+            currentQuizIndex = 0;
+            selectedAnswers = [];
+            showQuizQuestion();
+        };
+
+        function showQuizQuestion() {
+            const qData = quizQuestions[currentQuizIndex];
+            document.getElementById('quiz-step-indicator').textContent = `Question ${currentQuizIndex + 1} of 5`;
+            document.getElementById('quiz-question-title').textContent = qData.q;
+
+            const optionsList = document.getElementById('quiz-options-list');
+            optionsList.innerHTML = qData.options.map((opt, idx) => `
+                <div class="quiz-option" onclick="selectQuizOption(${idx})">
+                    <div class="quiz-radio"></div>
+                    <div>${opt}</div>
+                </div>
+            `).join('');
+        }
+
+        window.selectQuizOption = (idx) => {
+            document.querySelectorAll('.quiz-option').forEach((el, index) => {
+                if (index === idx) el.classList.add('selected');
+                else el.classList.remove('selected');
+            });
+            
+            selectedAnswers[currentQuizIndex] = idx;
+            
+            setTimeout(() => {
+                if (currentQuizIndex < 4) {
+                    currentQuizIndex++;
+                    showQuizQuestion();
+                } else {
+                    submitQuiz();
+                }
+            }, 500);
+        };
+
+        function submitQuiz() {
+            let correctCount = 0;
+            quizQuestions.forEach((q, idx) => {
+                if (selectedAnswers[idx] === q.ans) correctCount++;
+            });
+
+            if (correctCount === 5) {
+                triggerConfetti();
+                handlePassedAssessment();
+            } else {
+                document.getElementById('quiz-question-screen').style.display = 'none';
+                document.getElementById('quiz-intro-screen').innerHTML = `
+                    <div style="color:#f87171; font-weight:700; font-size:1.3rem; margin-bottom:1.5rem;">❌ Score: ${correctCount}/5</div>
+                    <p style="margin-bottom:2rem;">You missed some questions. You must get 5/5 to complete your training certification. Please review the modules and try again.</p>
+                    <button class="btn-academy btn-academy-next" onclick="startQuiz()" style="margin:0 auto; display:inline-flex;">Retake Assessment</button>
+                `;
+                document.getElementById('quiz-intro-screen').style.display = 'block';
+            }
+        }
+
+        function triggerConfetti() {
+            const duration = 3 * 1000;
+            const end = Date.now() + duration;
+
+            (function frame() {
+                confetti({
+                    particleCount: 4,
+                    angle: 60,
+                    spread: 60,
+                    origin: { x: 0 },
+                    colors: ['#E05D36', '#2E7D32', '#FFB300']
+                });
+                confetti({
+                    particleCount: 4,
+                    angle: 120,
+                    spread: 60,
+                    origin: { x: 1 },
+                    colors: ['#E05D36', '#2E7D32', '#FFB300']
+                });
+
+                if (Date.now() < end) {
+                    requestAnimationFrame(frame);
+                }
+            }());
+        }
+
+        async function handlePassedAssessment() {
+            const session = await checkActiveSession();
+            if (session) {
+                const { error } = await supabase
+                    .from('profiles')
+                    .update({ cook_onboarding_completed: true })
+                    .eq('id', session.user.id);
+                
+                if (error) {
+                    console.error("Profile update error:", error.message);
+                }
+                
+                document.getElementById('success-modal').style.display = 'flex';
+            } else {
+                openSyncModal(true);
+            }
+        }
+
+        let isCompletingAcademy = false;
+        window.openSyncModal = (completingQuiz = false) => {
+            isCompletingAcademy = completingQuiz;
+            if (completingQuiz) {
+                document.getElementById('modal-title').textContent = "Save Completion Certificate";
+                document.getElementById('modal-desc').textContent = "Enter your phone number used in the YenDidii App to update your profile application status.";
+            } else {
+                document.getElementById('modal-title').textContent = "Sync Your Account";
+                document.getElementById('modal-desc').textContent = "Login using your phone number to check or update your training status.";
+            }
+            document.getElementById('sync-modal').style.display = 'flex';
+        };
+
+        window.closeSyncModal = () => {
+            document.getElementById('sync-modal').style.display = 'none';
+            document.getElementById('sync-phone').value = '';
+            document.getElementById('sync-otp').value = '';
+            document.getElementById('sync-error-msg').style.display = 'none';
+            backToModalPhone();
+        };
+
+        window.backToModalPhone = () => {
+            document.getElementById('modal-otp-step').style.display = 'none';
+            document.getElementById('modal-phone-step').style.display = 'block';
+            document.getElementById('sync-error-msg').style.display = 'none';
+        };
+
+        window.sendSyncOTP = async () => {
+            const prefix = document.getElementById('sync-prefix').value.trim();
+            const phone = document.getElementById('sync-phone').value.trim();
+            const fullPhone = prefix + phone;
+            const btn = document.getElementById('btn-send-code');
+            const errorEl = document.getElementById('sync-error-msg');
+
+            btn.textContent = "Sending Code...";
+            btn.disabled = true;
+            errorEl.style.display = 'none';
+
+            const { error } = await supabase.auth.signInWithOtp({ phone: fullPhone });
+
+            if (error) {
+                errorEl.textContent = error.message;
+                errorEl.style.display = 'block';
+                btn.textContent = "Send Verification Code";
+                btn.disabled = false;
+                return;
+            }
+
+            window._syncPhone = fullPhone;
+            document.getElementById('modal-phone-step').style.display = 'none';
+            document.getElementById('modal-otp-step').style.display = 'block';
+            btn.textContent = "Send Verification Code";
+            btn.disabled = false;
+        };
+
+        window.verifySyncOTP = async () => {
+            const token = document.getElementById('sync-otp').value.trim();
+            const btn = document.getElementById('btn-verify-code');
+            const errorEl = document.getElementById('sync-error-msg');
+
+            btn.textContent = "Verifying...";
+            btn.disabled = true;
+            errorEl.style.display = 'none';
+
+            const { data, error } = await supabase.auth.verifyOtp({
+                phone: window._syncPhone,
+                token,
+                type: 'sms'
+            });
+
+            if (error || !data.user) {
+                errorEl.textContent = "Invalid code. Please try again.";
+                errorEl.style.display = 'block';
+                btn.textContent = "Verify & Link Progress";
+                btn.disabled = false;
+                return;
+            }
+
+            const { data: profile, error: pError } = await supabase
+                .from('profiles')
+                .update({ cook_onboarding_completed: true })
+                .eq('id', data.user.id)
+                .select()
+                .single();
+
+            if (pError) {
+                console.error("Profile sync update error", pError);
+            }
+
+            btn.textContent = "Verify & Link Progress";
+            btn.disabled = false;
+            
+            closeSyncModal();
+            updateUserHeader(profile || data.user);
+            
+            if (isCompletingAcademy) {
+                document.getElementById('success-modal').style.display = 'flex';
+            }
+        };
+
+        async function checkActiveSession() {
+            const { data: { session } } = await supabase.auth.getSession();
+            if (session) {
+                const { data: profile } = await supabase
+                    .from('profiles')
+                    .select('id, full_name, phone, cook_onboarding_completed')
+                    .eq('id', session.user.id)
+                    .single();
+                
+                updateUserHeader(profile || session.user);
+                return session;
+            }
+            return null;
+        }
+
+        function updateUserHeader(user) {
+            const label = user.full_name || user.phone || 'Cook';
+            const completedTag = user.cook_onboarding_completed ? '<span style="color:#4caf50;">✓ Certified</span>' : '<span style="color:var(--primary);">● Incomplete</span>';
+            document.getElementById('header-user-status').innerHTML = `
+                <span>Signed in: <strong>${label}</strong> (${completedTag})</span>
+                <button onclick="handleAcademySignout()" class="btn-sync-header" style="margin-left: 0.5rem;">Sign Out</button>
+            `;
+        }
+
+        window.handleAcademySignout = async () => {
+            await supabase.auth.signOut();
+            document.getElementById('header-user-status').innerHTML = `
+                <button onclick="openSyncModal()" class="btn-sync-header">Sync Account</button>
+            `;
+        };
+
+        checkActiveSession();
+        updateNavigationButtons();
+        updateProgress();
+
+    </script>
+</body>
+</html>

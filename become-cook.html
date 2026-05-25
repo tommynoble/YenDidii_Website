@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Become a Cook — YenDidii</title>
+    <meta name="description" content="Join YenDidii as a home cook. Learn our food safety standards, Ghana FDA requirements, and how to host guests from your kitchen.">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Premium Enhanced Styles */
+        .training-hero {
+            background: linear-gradient(135deg, #0f0a05 0%, #1c1007 40%, #2e1708 100%);
+            padding: 9rem 0 7rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Floating decorative light orbs */
+        .training-hero::before {
+            content: '';
+            position: absolute;
+            top: -10%; right: -10%;
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(224,93,54,0.15) 0%, transparent 70%);
+            filter: blur(40px);
+            pointer-events: none;
+        }
+        .training-hero::after {
+            content: '';
+            position: absolute;
+            bottom: -10%; left: -10%;
+            width: 350px; height: 350px;
+            background: radial-gradient(circle, rgba(255,179,0,0.08) 0%, transparent 70%);
+            filter: blur(45px);
+            pointer-events: none;
+        }
+
+        .training-hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 4.5rem;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-text-side {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: left;
+        }
+
+        .training-hero .badge {
+            background: rgba(224, 93, 54, 0.1);
+            color: #ff7849;
+            border: 1px solid rgba(224, 93, 54, 0.25);
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            padding: 0.5rem 1.2rem;
+            margin-bottom: 2rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border-radius: 100px;
+            box-shadow: 0 4px 20px rgba(224, 93, 54, 0.05);
+        }
+
+        .training-hero h1 {
+            font-size: 3.5rem;
+            color: #fff;
+            margin-bottom: 1.5rem;
+            line-height: 1.15;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+        }
+
+        .training-hero h1 span {
+            background: linear-gradient(to right, #ff7849, #ffb300);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .training-hero p {
+            font-size: 1.2rem;
+            color: #cbd5e1;
+            margin-bottom: 3rem;
+            line-height: 1.65;
+            max-width: 600px;
+        }
+
+        .hero-image-side {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .chef-image-card {
+            position: relative;
+            border-radius: 28px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 35px 70px rgba(0,0,0,0.45);
+            width: 100%;
+            max-width: 420px;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .chef-image-card:hover {
+            transform: translateY(-8px) scale(1.02);
+        }
+
+        .chef-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+            aspect-ratio: 4/5;
+        }
+
+        .chef-floating-badge {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px;
+            padding: 1.1rem 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+        }
+
+        .chef-floating-badge .badge-icon {
+            font-size: 1.6rem;
+        }
+
+        .chef-floating-badge .badge-title {
+            color: #fff;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .chef-floating-badge .badge-subtitle {
+            color: #94a3b8;
+            font-size: 0.78rem;
+            margin-top: 0.15rem;
+        }
+
+        .hero-stats-glass {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: var(--radius-lg);
+            padding: 1.75rem 2.5rem;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.75rem;
+            margin-top: 1.5rem;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            width: 100%;
+        }
+
+        .hero-stat {
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-stat:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            right: -0.85rem;
+            top: 15%;
+            height: 70%;
+            width: 1px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .hero-stat .num {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #ff7849;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(135deg, #fff 30%, #ff7849 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-stat .lbl {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            margin-top: 0.4rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Steps Section - enhanced with connection lines and hover states */
+        .process-section {
+            padding: 8rem 0;
+            background: #fff;
+            position: relative;
+        }
+
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+        }
+
+        .process-step {
+            text-align: center;
+            padding: 2.5rem 1.5rem;
+            border-radius: var(--radius-md);
+            background: var(--bg-main);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .process-step:hover {
+            transform: translateY(-8px);
+            background: #fff;
+            box-shadow: var(--shadow-lg);
+            border-color: rgba(224, 93, 54, 0.2);
+        }
+
+        .step-num {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--primary-light);
+            color: var(--primary);
+            font-weight: 800;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 8px 16px rgba(224, 93, 54, 0.1);
+            transition: all 0.3s;
+        }
+
+        .process-step:hover .step-num {
+            background: var(--primary);
+            color: #fff;
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(224, 93, 54, 0.3);
+        }
+
+        .process-step h4 {
+            font-size: 1.15rem;
+            margin-bottom: 0.75rem;
+            font-weight: 700;
+        }
+
+        .process-step p {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* Earnings Calculator Section */
+        .calc-section {
+            padding: 8rem 0;
+            background: linear-gradient(180deg, var(--bg-main) 0%, #fff 100%);
+            border-top: 1px solid var(--border-color);
+        }
+
+        .calc-container {
+            max-width: 960px;
+            margin: 3rem auto 0;
+            background: #fff;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-lg);
+            padding: 4rem;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .calc-container::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 6px; height: 100%;
+            background: linear-gradient(to bottom, var(--primary), var(--yellow));
+        }
+
+        .calc-sliders {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+        }
+
+        .slider-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .slider-label {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 600;
+            font-size: 1.05rem;
+            color: var(--text-dark);
+        }
+
+        .slider-label span {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .range-slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            outline: none;
+        }
+
+        .range-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--primary);
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(224, 93, 54, 0.3);
+            border: 2px solid #fff;
+            transition: all 0.2s;
+        }
+
+        .range-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+            box-shadow: 0 4px 15px rgba(224, 93, 54, 0.5);
+        }
+
+        .calc-result {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border-radius: var(--radius-md);
+            padding: 3rem 2rem;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            box-shadow: var(--shadow-md);
+        }
+
+        .calc-result .label {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.75rem;
+        }
+
+        .calc-result .value {
+            font-size: 3.4rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 0.75rem;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(to right, #fff, #ffd6b3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .calc-result .subtext {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Requirements Grid - Styled exactly matching user screenshot */
+        .requirements-section {
+            padding: 8rem 0;
+            background: var(--bg-main);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .req-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            max-width: 1100px;
+            margin: 3rem auto 0;
+            padding: 0 2rem;
+        }
+
+        .req-card {
+            background: #fff;
+            border-radius: 24px;
+            padding: 2.75rem;
+            border: 1px solid #f1f5f9;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.015);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .req-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+        }
+
+        .req-card .req-icon {
+            width: 72px;
+            height: 72px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 1.75rem;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.02);
+            transition: transform 0.3s;
+        }
+
+        .req-card:hover .req-icon {
+            transform: scale(1.08);
+        }
+
+        .req-card h4 {
+            font-size: 1.25rem;
+            margin-bottom: 1.2rem;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .req-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .req-card ul li {
+            display: flex;
+            gap: 0.85rem;
+            align-items: flex-start;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 0.85rem;
+            line-height: 1.55;
+        }
+
+        .req-card ul li:last-child {
+            margin-bottom: 0;
+        }
+
+        .req-card ul li::before {
+            content: '✓';
+            color: #4caf50;
+            font-weight: 800;
+            flex-shrink: 0;
+            font-size: 1rem;
+        }
+
+        /* Syllabus Section */
+        .syllabus-section {
+            padding: 8rem 0;
+            background: #fff;
+        }
+
+        .syllabus-wrap {
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .syllabus-list {
+            text-align: left;
+            margin: 4rem auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            max-width: 720px;
+        }
+
+        .syllabus-item {
+            background: var(--bg-main);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 1.75rem 2.2rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            transition: all 0.25s;
+        }
+
+        .syllabus-item:hover {
+            transform: translateX(5px);
+            border-color: rgba(224, 93, 54, 0.25);
+            background: rgba(224, 93, 54, 0.01);
+        }
+
+        .syllabus-num {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--primary-light);
+            color: var(--primary);
+            font-weight: 800;
+            font-size: 1.05rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            box-shadow: 0 4px 10px rgba(224, 93, 54, 0.08);
+        }
+
+        .syllabus-item h4 {
+            margin: 0;
+            font-size: 1.15rem;
+            font-weight: 700;
+        }
+
+        .syllabus-item p {
+            margin: 0.3rem 0 0;
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* Ghana Legal Banner with flag background details */
+        .ghana-banner {
+            background: linear-gradient(135deg, #103d15, #1B5E20);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            margin-top: 4rem;
+            display: flex;
+            gap: 2rem;
+            align-items: flex-start;
+            text-align: left;
+            box-shadow: 0 10px 35px rgba(27, 94, 32, 0.15);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .ghana-banner .flag {
+            font-size: 3rem;
+            flex-shrink: 0;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+        }
+
+        .ghana-banner h4 {
+            color: #fff;
+            margin-bottom: 0.75rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .ghana-banner p {
+            color: #c8e6c9;
+            font-size: 0.95rem;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .ghana-banner a {
+            color: #a5d6a7;
+            text-decoration: underline;
+            font-weight: 600;
+        }
+
+        .ghana-banner a:hover {
+            color: #fff;
+        }
+
+        /* CTA */
+        .become-cta {
+            padding: 8rem 0;
+            background: linear-gradient(135deg, #E05D36 0%, #d84b22 100%);
+            text-align: center;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .become-cta::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: radial-gradient(circle at 30% 70%, rgba(255,179,0,0.15) 0%, transparent 60%);
+        }
+
+        .become-cta h2 {
+            color: #fff;
+            font-size: 3.2rem;
+            margin-bottom: 1.2rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+
+        .become-cta p {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.25rem;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .become-cta .btn-white {
+            background: #fff;
+            color: var(--primary);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .become-cta .btn-white:hover {
+            background: #fdf2ee;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        /* Global Header adjustments */
+        .btn-header-cta {
+            background: linear-gradient(135deg, var(--primary) 0%, #ff7849 100%);
+            color: #fff !important;
+            padding: 0.7rem 1.4rem;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(224, 93, 54, 0.2);
+        }
+        .btn-header-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(224, 93, 54, 0.35);
+        }
+
+        @media(max-width: 990px) {
+            .training-hero-container { grid-template-columns: 1fr; gap: 3.5rem; text-align: center; }
+            .hero-text-side { align-items: center; text-align: center; }
+            .training-hero h1 { text-align: center; font-size: 3rem; }
+            .training-hero p { text-align: center; }
+            .process-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+            .req-grid { grid-template-columns: 1fr; }
+            .calc-container { grid-template-columns: 1fr; padding: 2.5rem; gap: 2.5rem; }
+        }
+        @media(max-width: 600px) {
+            .training-hero h1 { font-size: 2.4rem; }
+            .process-grid { grid-template-columns: 1fr; }
+            .become-cta h2 { font-size: 2.4rem; }
+            .hero-stats-glass { grid-template-columns: 1fr; gap: 1.5rem; padding: 2rem; }
+            .hero-stat:not(:last-child)::after { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo-group">
+                <div class="logo-icon">Y</div>
+                <span class="logo-text">Yen<span>Didii</span></span>
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html#eaters" class="nav-link">For Eaters</a></li>
+                    <li><a href="index.html#cooks" class="nav-link">For Cooks</a></li>
+                    <li><a href="index.html#map-explore" class="nav-link">Explore Map</a></li>
+                    <li><a href="support.html" class="nav-link">Support</a></li>
+                    <li><a href="cook-training.html" class="nav-header-cta">Start Training</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="training-hero">
+        <div class="training-hero-container">
+            <div class="hero-text-side">
+                <div class="badge">
+                    <span style="font-size: 1rem; line-height: 1;">🍳</span>
+                    YenDidii Academy Program
+                </div>
+                <h1>Become a Certified <span>YenDidii Cook</span></h1>
+                <p>Turn your kitchen into a home kitchen restaurant. Reach hungry neighbors, manage bookings seamlessly, and build an independent cooking business.</p>
+                <div style="display:flex; gap:1.25rem; flex-wrap:wrap; margin-bottom: 2rem;">
+                    <a href="cook-training.html" class="btn-primary" style="box-shadow: 0 10px 30px rgba(224, 93, 54, 0.4);">
+                        <span>Launch Cook Academy</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </a>
+                    <a href="index.html#download" class="btn-secondary" style="border-color:rgba(255,255,255,0.4); color:#fff; background: rgba(255,255,255,0.02); backdrop-filter: blur(8px);">Download Cook App</a>
+                </div>
+                <div class="hero-stats-glass">
+                    <div class="hero-stat">
+                        <div class="num">GH₵50–200</div>
+                        <div class="lbl">Avg. payout</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="num">5 Modules</div>
+                        <div class="lbl">Syllabus</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="num">24–48h</div>
+                        <div class="lbl">Review</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image-side">
+                <div class="chef-image-card">
+                    <img src="assets/chef.jpg" alt="Certified YenDidii Cook" class="chef-img">
+                    <div class="chef-floating-badge">
+                        <span class="badge-icon">👩‍🍳</span>
+                        <div>
+                            <div class="badge-title">Chef Nana Kwame</div>
+                            <div class="badge-subtitle">Verified YenDidii Host</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="process-section">
+        <div class="section-title">
+            <h2>Your Journey to Approval</h2>
+            <p>We've streamlined the onboarding flow so you can start cooking and hosting in no time.</p>
+        </div>
+        <div class="process-grid">
+            <div class="process-step">
+                <div class="step-num">1</div>
+                <h4>Apply in the App</h4>
+                <p>Register as a cook inside the YenDidii App. Submit basic details about your cooking background.</p>
+            </div>
+            <div class="process-step">
+                <div class="step-num">2</div>
+                <h4>Complete Training</h4>
+                <p>Learn our food safety rules, hygiene guidelines, and hosting culture in our online interactive portal.</p>
+            </div>
+            <div class="process-step">
+                <div class="step-num">3</div>
+                <h4>Account Approval</h4>
+                <p>Our verification team reviews your application materials and activates your cook status.</p>
+            </div>
+            <div class="process-step">
+                <div class="step-num">4</div>
+                <h4>Start Cooking</h4>
+                <p>Open your stove! Host diners for a home restaurant session or prepare orders for local pickup.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Earnings Calculator Section -->
+    <section class="calc-section">
+        <div class="section-title">
+            <h2>Calculate Your Potential Earnings</h2>
+            <p>Move the sliders below to estimate your kitchen's monthly income on YenDidii.</p>
+        </div>
+        <div class="calc-container">
+            <div class="calc-sliders">
+                <div class="slider-group">
+                    <div class="slider-label">
+                        Price per plate <span>GH₵ <span id="val-price">45</span></span>
+                    </div>
+                    <input type="range" min="20" max="150" value="45" class="range-slider" id="slider-price" oninput="calculateEarnings()">
+                </div>
+                <div class="slider-group">
+                    <div class="slider-label">
+                        Plates sold per week <span><span id="val-plates">15</span> plates</span>
+                    </div>
+                    <input type="range" min="5" max="100" value="15" class="range-slider" id="slider-plates" oninput="calculateEarnings()">
+                </div>
+            </div>
+            <div class="calc-result">
+                <div class="label">Estimated Monthly Revenue</div>
+                <div class="value">GH₵ <span id="monthly-earnings">2,700</span></div>
+                <div class="subtext">Based on 4 active weeks. Standard processing fees apply.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Requirements Section -->
+    <section class="requirements-section">
+        <div class="section-title">
+            <h2>Host Kitchen Requirements</h2>
+            <p>Ensure you satisfy these essential categories before submitting your registration details.</p>
+        </div>
+        <div class="req-grid">
+            <div class="req-card">
+                <div class="req-icon" style="background:#fff5f2; color:#ff7849;">🏠</div>
+                <h4>Kitchen &amp; Storage</h4>
+                <ul>
+                    <li>A sanitary, ventilated cooking area</li>
+                    <li>Continuous running water and clean workstation surfaces</li>
+                    <li>Cold refrigeration units to preserve raw ingredients</li>
+                    <li>Cozy seating area for eaters (dine-in hosts only)</li>
+                </ul>
+            </div>
+            <div class="req-card">
+                <div class="req-icon" style="background:#f0fdf4; color:#2e7d32;">📋</div>
+                <h4>Identity &amp; Certifications</h4>
+                <ul>
+                    <li>Valid Government ID (Ghana Card or Passport)</li>
+                    <li>Active phone connection linked to Mobile Money</li>
+                    <li>Ghana FDA recommended Food Handler medical check</li>
+                    <li>At least 2 clean kitchen/food preparation photographs</li>
+                </ul>
+            </div>
+            <div class="req-card">
+                <div class="req-icon" style="background:#faf5ff; color:#8e24aa;">👩‍🍳</div>
+                <h4>Skill &amp; Culinary Standards</h4>
+                <ul>
+                    <li>Proven ability to prepare delicious traditional recipes</li>
+                    <li>Understanding of local spice tolerances &amp; heat levels</li>
+                    <li>Clear disclosure of groundnuts, seafood, or common allergens</li>
+                    <li>Consistent cooking and preparation times</li>
+                </ul>
+            </div>
+            <div class="req-card">
+                <div class="req-icon" style="background:#f0f9ff; color:#1565c0;">📱</div>
+                <h4>Technology &amp; Commitments</h4>
+                <ul>
+                    <li>Active iOS or Android smartphone with YenDidii App</li>
+                    <li>Fast booking response time (under 30 minutes)</li>
+                    <li>Flexibility to list session slots once or twice a week</li>
+                    <li>Open, welcoming attitude to neighbors in your area</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Syllabus Section -->
+    <section class="syllabus-section">
+        <div class="syllabus-wrap">
+            <div class="section-title">
+                <h2>Academy Curriculum Overview</h2>
+                <p>The interactive training course covers 5 foundational modules that every host cook should master.</p>
+            </div>
+
+            <div class="syllabus-list">
+                <div class="syllabus-item">
+                    <div class="syllabus-num">1</div>
+                    <div>
+                        <h4>Food Safety &amp; Ghana FDA Standards</h4>
+                        <p>Familiarise yourself with the Public Health Act 2012 (Act 851), obtaining health handler cards, and sourcing clean pipeline/sachet water.</p>
+                    </div>
+                </div>
+                <div class="syllabus-item">
+                    <div class="syllabus-num">2</div>
+                    <div>
+                        <h4>Kitchen Sanitation Rules</h4>
+                        <p>Strict handwashing rules (20 seconds), hairnets, clean chef aprons, and deep-sanitisation guidelines for knives/utensils.</p>
+                    </div>
+                </div>
+                <div class="syllabus-item">
+                    <div class="syllabus-num">3</div>
+                    <div>
+                        <h4>Danger Zones &amp; Cold Chain</h4>
+                        <p>Protecting food from bacterial multiplication between 5°C and 60°C. Storing raw meats safely on lower refrigeration shelves.</p>
+                    </div>
+                </div>
+                <div class="syllabus-item">
+                    <div class="syllabus-num">4</div>
+                    <div>
+                        <h4>Hospitality &amp; Dine-In Warmth</h4>
+                        <p>Providing the quintessential Ghanaian welcome (Akwaaba), serving clean water, and managing allergic disclosures for groundnuts.</p>
+                    </div>
+                </div>
+                <div class="syllabus-item">
+                    <div class="syllabus-num">5</div>
+                    <div>
+                        <h4>YenDidii App Operations</h4>
+                        <p>Setting up listing rates, declaring portions, using "Join the Pot" events, and receiving direct Mobile Money wallet payouts.</p>
+                    </div>
+                </div>
+            </div>
+
+            <a href="cook-training.html" class="btn-primary" style="margin-bottom: 2rem; box-shadow: 0 10px 30px rgba(224, 93, 54, 0.35);">Launch Interactive Training Portal</a>
+
+            <!-- Ghana Legal Box -->
+            <div class="ghana-banner">
+                <div class="flag">🇬🇭</div>
+                <div>
+                    <h4>Ghana Food Handlers Regulatory Compliance</h4>
+                    <p>Under local metropolitan and municipal regulations, individuals serving meals to the public require standard medical certificates. YenDidii strongly encourages all chefs to register with their district health inspectors. For direct assistance or inquiries on obtaining certification, read our academy modules or email <a href="mailto:support@yendidii.com">support@yendidii.com</a>.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Apply CTA -->
+    <section class="become-cta" id="apply">
+        <h2>Open Your Kitchen to Neighbors</h2>
+        <p>Join the premier network of passionate cooks sharing local food across Ghana. Download the app to begin.</p>
+        <a href="index.html#download" class="btn-white">Get YenDidii App</a>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <div class="footer-logo-row">
+                    <div class="footer-logo-circle"><img src="assets/logo.png" alt="YenDidii Logo"></div>
+                    <h3>Yen<span>Didii</span></h3>
+                </div>
+                <p>The premier foodsharing marketplace connecting passionate home cooks and local food lovers in Ghana and beyond.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Explore</h4>
+                <ul>
+                    <li><a href="index.html#eaters">For Eaters</a></li>
+                    <li><a href="index.html#cooks">For Cooks</a></li>
+                    <li><a href="index.html#map-explore">Map View</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Legal &amp; Support</h4>
+                <ul>
+                    <li><a href="support.html">Contact Support</a></li>
+                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                    <li><a href="become-cook.html">Become a Cook</a></li>
+                    <li><a href="cook-training.html">Cook Training</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Partners</h4>
+                <ul>
+                    <li><a href="admin.html" style="opacity:0.5;font-size:0.85rem;">Admin Portal</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 YenDidii. All rights reserved.</p>
+            <p>Made with love for the local community.</p>
+        </div>
+    </footer>
+
+    <script>
+        function calculateEarnings() {
+            const price = parseFloat(document.getElementById('slider-price').value);
+            const plates = parseInt(document.getElementById('slider-plates').value);
+            document.getElementById('val-price').textContent = price;
+            document.getElementById('val-plates').textContent = plates;
+            
+            const weekly = price * plates;
+            const monthly = weekly * 4;
+            document.getElementById('monthly-earnings').textContent = monthly.toLocaleString();
+        }
+    </script>
+</body>
+</html>

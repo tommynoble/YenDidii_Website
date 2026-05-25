@@ -142,6 +142,12 @@ a {
   color: white;
 }
 
+/* Mobile Toggle */
+.nav-toggle {
+  display: none;
+}
+
+
 /* Hero Section */
 .hero {
   padding: 5rem 0 7rem 0;
@@ -545,7 +551,7 @@ a {
   margin: 0 auto;
   padding: 0 2rem;
   display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr;
+  grid-template-columns: 1.5fr 1fr 1fr 0.7fr;
   gap: 4rem;
   border-bottom: 1px solid rgba(255,255,255,0.1);
   padding-bottom: 3rem;
@@ -710,6 +716,89 @@ a {
 
 /* Responsive queries */
 @media(max-width: 968px) {
+  .nav-container {
+    position: relative;
+    width: 100%;
+  }
+
+  .nav-toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 24px;
+    height: 18px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1001;
+  }
+
+  .nav-toggle .bar {
+    width: 100%;
+    height: 2px;
+    background-color: var(--text-dark);
+    transition: all 0.3s ease;
+    border-radius: 2px;
+  }
+
+  .nav-toggle.active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  .nav-toggle.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .nav-toggle.active .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  .nav-container nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(250, 249, 248, 0.98);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    display: none;
+    padding: 2rem;
+    z-index: 999;
+  }
+
+  .nav-container nav.active {
+    display: block;
+  }
+
+  .nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+    width: 100%;
+  }
+
+  .nav-links li {
+    width: 100%;
+    text-align: center;
+  }
+
+  .nav-links li a {
+    display: block;
+    width: 100%;
+    padding: 0.5rem 0;
+    font-size: 1.15rem;
+  }
+
+  .nav-btn {
+    display: inline-block !important;
+    width: auto !important;
+    padding: 0.8rem 2.2rem !important;
+  }
+
   .hero-grid {
     grid-template-columns: 1fr;
     text-align: center;
@@ -776,3 +865,4 @@ a {
     gap: 2.5rem;
   }
 }
+

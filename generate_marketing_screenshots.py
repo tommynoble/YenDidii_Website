@@ -1,7 +1,7 @@
 import os
 from PIL import Image, ImageDraw, ImageFont
 
-# Define Canvas and Layout Constants
+# Define Canvas and Layout Constants for the base design (6.7" Display)
 CANVAS_WIDTH = 1290
 CANVAS_HEIGHT = 2796
 SCREENSHOT_WIDTH = 960
@@ -19,10 +19,12 @@ TEXT_LIGHT_CHARCOAL = (242, 234, 228, 255)
 
 # Paths
 INPUT_DIR = "app_store_screenshots/iphone"
-OUTPUT_DIR = "app_store_screenshots/iphone_promo"
+OUTPUT_DIR_6_7 = "app_store_screenshots/iphone_promo_6.7"
+OUTPUT_DIR_6_5 = "app_store_screenshots/iphone_promo_6.5"
 
-# Ensure output directory exists
-os.makedirs(OUTPUT_DIR, exist_ok=True)
+# Ensure output directories exist
+os.makedirs(OUTPUT_DIR_6_7, exist_ok=True)
+os.makedirs(OUTPUT_DIR_6_5, exist_ok=True)
 
 # Screenshot configuration
 SCREENSHOTS_CONFIG = [
@@ -135,7 +137,6 @@ def main():
     
     for config in SCREENSHOTS_CONFIG:
         input_path = os.path.join(INPUT_DIR, config["filename"])
-        output_path = os.path.join(OUTPUT_DIR, config["output_name"])
         
         if not os.path.exists(input_path):
             print(f"Warning: Screenshot file not found: {input_path}")
@@ -146,7 +147,7 @@ def main():
         # Load screenshot
         screenshot = Image.open(input_path)
         
-        # Create solid canvas with the requested background color
+        # Create solid canvas with the requested background color (base size 6.7" display: 1290x2796)
         canvas = Image.new("RGBA", (CANVAS_WIDTH, CANVAS_HEIGHT), config["bg_color"])
         draw = ImageDraw.Draw(canvas)
         
@@ -181,9 +182,22 @@ def main():
         # Paste rounded screenshot onto the canvas
         canvas.paste(rounded_screenshot, (x_offset, y_offset), mask=rounded_screenshot)
         
-        # Save output in high-quality PNG format
-        canvas.save(output_path, "PNG")
-        print(f"Saved: {output_path}")
+        # 1. Save Base 6.7" version (1290 x 2796)
+        output_path_6_7 = os.path.join(OUTPUT_DIR_6_7, config["output_name"])
+        canvas.save(output_path_6_7, "PNG")
+        print(f"  Saved 6.7\" Display: {output_path_6_7}")
+        
+        # 2. Save 6.5" Display standard size (1242 x 2688)
+        canvas_6_5_std = canvas.resize((1242, 2688), Image.Resampling.LANCZOS)
+        output_path_6_5_std = os.path.join(OUTPUT_DIR_6_5, config["output_name"])
+        canvas_6_5_std.save(output_path_6_5_std, "PNG")
+        print(f"  Saved 6.5\" Display (1242x2688): {output_path_6_5_std}")
+        
+        # 3. Save 6.5" Display alternative size (1284 x 2778)
+        canvas_6_5_alt = canvas.resize((1284, 2778), Image.Resampling.LANCZOS)
+        output_path_6_5_alt = os.path.join(OUTPUT_DIR_6_5, config["output_name"].replace(".png", "_1284.png"))
+        canvas_6_5_alt.save(output_path_6_5_alt, "PNG")
+        print(f"  Saved 6.5\" Display Alternative (1284x2778): {output_path_6_5_alt}")
 
 if __name__ == "__main__":
     main()

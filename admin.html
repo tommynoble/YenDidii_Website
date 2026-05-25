@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YenDidii Admin — Cook Applications</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body { background: #0f172a; color: #e2e8f0; min-height: 100vh; }
+        .admin-wrap { max-width: 960px; margin: 0 auto; padding: 3rem 2rem; }
+
+        /* Login Card */
+        .login-card {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 20px;
+            padding: 3rem;
+            max-width: 420px;
+            margin: 8rem auto;
+            text-align: center;
+        }
+        .login-card .logo-row {
+            display: flex; align-items: center; justify-content: center;
+            gap: 0.75rem; margin-bottom: 2rem;
+        }
+        .login-card .logo-icon { background: #E05D36; width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.2rem; color: #fff; }
+        .login-card h2 { font-size: 1.6rem; color: #fff; margin-bottom: 0.4rem; }
+        .login-card p { color: #64748b; margin-bottom: 2rem; font-size: 0.9rem; }
+        .login-card input {
+            width: 100%; padding: 0.85rem 1rem; background: #0f172a;
+            border: 1px solid #334155; border-radius: 10px; color: #e2e8f0;
+            font-size: 1rem; font-family: inherit; margin-bottom: 1rem;
+        }
+        .login-card input:focus { outline: none; border-color: #E05D36; }
+        .btn-login {
+            width: 100%; padding: 0.9rem; background: #E05D36; color: #fff;
+            border: none; border-radius: 10px; font-size: 1rem; font-weight: 700;
+            cursor: pointer; font-family: inherit; transition: background 0.2s;
+        }
+        .btn-login:hover { background: #c54b25; }
+        #login-error { color: #f87171; font-size: 0.9rem; margin-top: 0.75rem; display: none; }
+
+        /* Dashboard */
+        #dashboard { display: none; }
+        .admin-header {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 2.5rem; padding-bottom: 1.5rem;
+            border-bottom: 1px solid #1e293b;
+        }
+        .admin-header h1 { font-size: 1.8rem; color: #fff; }
+        .admin-header span { color: #64748b; font-size: 0.9rem; }
+        .btn-signout {
+            background: #1e293b; color: #94a3b8; border: 1px solid #334155;
+            padding: 0.5rem 1.2rem; border-radius: 8px; cursor: pointer;
+            font-family: inherit; font-size: 0.9rem; transition: all 0.2s;
+        }
+        .btn-signout:hover { background: #334155; color: #fff; }
+
+        /* Stats */
+        .stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 2.5rem; }
+        .stat-card { background: #1e293b; border: 1px solid #334155; border-radius: 14px; padding: 1.5rem; text-align: center; }
+        .stat-card .num { font-size: 2.2rem; font-weight: 800; color: #fff; }
+        .stat-card .label { font-size: 0.85rem; color: #64748b; margin-top: 0.3rem; }
+        .stat-card.pending .num { color: #fbbf24; }
+        .stat-card.approved .num { color: #34d399; }
+        .stat-card.rejected .num { color: #f87171; }
+
+        /* Filter Tabs */
+        .filter-tabs { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; }
+        .tab-btn {
+            padding: 0.5rem 1.2rem; border-radius: 8px; border: 1px solid #334155;
+            background: transparent; color: #94a3b8; cursor: pointer;
+            font-family: inherit; font-size: 0.9rem; transition: all 0.2s;
+        }
+        .tab-btn.active, .tab-btn:hover { background: #E05D36; color: #fff; border-color: #E05D36; }
+
+        /* Application Cards */
+        #applications-list { display: flex; flex-direction: column; gap: 1rem; }
+        .app-card {
+            background: #1e293b; border: 1px solid #334155; border-radius: 16px;
+            padding: 1.5rem; transition: border-color 0.2s;
+        }
+        .app-card:hover { border-color: #475569; }
+        .app-top { display: flex; justify-content: space-between; align-items: flex-start; }
+        .app-name { font-size: 1.15rem; font-weight: 700; color: #fff; }
+        .app-phone { font-size: 0.85rem; color: #64748b; margin-top: 0.2rem; }
+        .status-badge {
+            padding: 0.3rem 0.9rem; border-radius: 50px; font-size: 0.8rem;
+            font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;
+        }
+        .status-pending { background: #422006; color: #fbbf24; }
+        .status-approved { background: #052e16; color: #34d399; }
+        .status-rejected { background: #450a0a; color: #f87171; }
+        .app-meta { display: flex; flex-wrap: wrap; gap: 1rem; margin: 1rem 0; }
+        .app-meta span { font-size: 0.85rem; color: #94a3b8; }
+        .app-meta strong { color: #cbd5e1; }
+        .app-actions { display: flex; gap: 0.75rem; margin-top: 1.2rem; }
+        .btn-approve, .btn-reject {
+            padding: 0.55rem 1.3rem; border-radius: 8px; border: none;
+            font-family: inherit; font-size: 0.9rem; font-weight: 600;
+            cursor: pointer; transition: all 0.2s;
+        }
+        .btn-approve { background: #052e16; color: #34d399; border: 1px solid #166534; }
+        .btn-approve:hover { background: #14532d; }
+        .btn-reject { background: #450a0a; color: #f87171; border: 1px solid #7f1d1d; }
+        .btn-reject:hover { background: #7f1d1d; }
+        .btn-disabled { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
+
+        .empty-state { text-align: center; padding: 4rem; color: #475569; }
+        .empty-state svg { margin-bottom: 1rem; opacity: 0.4; }
+
+        #toast {
+            position: fixed; bottom: 2rem; right: 2rem;
+            background: #1e293b; border: 1px solid #334155;
+            color: #e2e8f0; padding: 1rem 1.5rem; border-radius: 12px;
+            font-size: 0.95rem; display: none; z-index: 9999;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+        #toast.show { display: block; }
+        #toast.success { border-color: #166534; color: #34d399; }
+        #toast.error { border-color: #7f1d1d; color: #f87171; }
+
+        #loading { text-align: center; padding: 3rem; color: #64748b; }
+    </style>
+</head>
+<body>
+
+<!-- LOGIN SCREEN -->
+<div id="login-screen">
+    <div class="login-card">
+        <div class="logo-row">
+            <div class="logo-icon">Y</div>
+            <span style="font-size:1.4rem;font-weight:800;color:#fff;">Yen<span style="color:#E05D36">Didii</span></span>
+        </div>
+        <h2>Admin Portal</h2>
+
+        <!-- Step 1: Phone -->
+        <div id="step-phone">
+            <p>Enter your phone number to receive a verification code.</p>
+            <div style="display:flex;gap:0.5rem;margin-bottom:1rem;">
+                <input type="text" value="+44" id="phone-prefix" style="width:70px;text-align:center;" readonly>
+                <input type="tel" id="admin-phone" placeholder="7868024799" style="flex:1;">
+            </div>
+            <button class="btn-login" id="send-otp-btn" onclick="handleSendOTP()">Send Code</button>
+        </div>
+
+        <!-- Step 2: OTP -->
+        <div id="step-otp" style="display:none;">
+            <p id="otp-hint">Enter the 6-digit code sent to your phone.</p>
+            <input type="number" id="admin-otp" placeholder="123456" style="letter-spacing:0.3em;text-align:center;font-size:1.4rem;">
+            <button class="btn-login" id="verify-otp-btn" onclick="handleVerifyOTP()">Verify &amp; Sign In</button>
+            <p style="margin-top:0.8rem;"><button onclick="backToPhone()" style="background:none;border:none;color:#64748b;cursor:pointer;font-family:inherit;font-size:0.85rem;">← Use different number</button></p>
+        </div>
+
+        <p id="login-error" style="color:#f87171;font-size:0.9rem;margin-top:0.75rem;display:none;">Something went wrong. Please try again.</p>
+    </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard" class="admin-wrap">
+    <div class="admin-header">
+        <div>
+            <h1>Cook Applications</h1>
+            <span id="admin-greeting">Welcome back, Admin</span>
+        </div>
+        <button class="btn-signout" onclick="handleSignout()">Sign Out</button>
+    </div>
+
+    <div class="stats-row">
+        <div class="stat-card pending">
+            <div class="num" id="stat-pending">—</div>
+            <div class="label">Pending Review</div>
+        </div>
+        <div class="stat-card approved">
+            <div class="num" id="stat-approved">—</div>
+            <div class="label">Approved Cooks</div>
+        </div>
+        <div class="stat-card rejected">
+            <div class="num" id="stat-rejected">—</div>
+            <div class="label">Rejected</div>
+        </div>
+    </div>
+
+    <div class="filter-tabs">
+        <button class="tab-btn active" onclick="filterApps('pending', this)">Pending</button>
+        <button class="tab-btn" onclick="filterApps('approved', this)">Approved</button>
+        <button class="tab-btn" onclick="filterApps('rejected', this)">Rejected</button>
+        <button class="tab-btn" onclick="filterApps('all', this)">All</button>
+    </div>
+
+    <div id="loading">Loading applications…</div>
+    <div id="applications-list"></div>
+</div>
+
+<div id="toast"></div>
+
+<script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+
+    const SUPABASE_URL = 'https://cspyaqpjlvwlrtwtlpmm.supabase.co';
+    const SUPABASE_ANON_KEY = 'sb_publishable_v9hsHGAAidnXT8m5eGDDdw_FC-saVC-';
+
+    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    let allApplicants = [];
+    let currentFilter = 'pending';
+
+    // ─── AUTH ──────────────────────────────────────────────────────────────────
+
+    window.handleSendOTP = async () => {
+        const prefix = document.getElementById('phone-prefix').value.trim();
+        const number = document.getElementById('admin-phone').value.trim();
+        const fullPhone = prefix + number;
+        const btn = document.getElementById('send-otp-btn');
+        const errEl = document.getElementById('login-error');
+
+        btn.textContent = 'Sending…';
+        btn.disabled = true;
+        errEl.style.display = 'none';
+
+        const { error } = await supabase.auth.signInWithOtp({ phone: fullPhone });
+
+        if (error) {
+            errEl.textContent = error.message;
+            errEl.style.display = 'block';
+            btn.textContent = 'Send Code';
+            btn.disabled = false;
+            return;
+        }
+
+        document.getElementById('otp-hint').textContent =
+            `Code sent to ${fullPhone}. Check your messages.`;
+        document.getElementById('step-phone').style.display = 'none';
+        document.getElementById('step-otp').style.display = 'block';
+        btn.textContent = 'Send Code';
+        btn.disabled = false;
+        window._adminPhone = fullPhone;
+    };
+
+    window.backToPhone = () => {
+        document.getElementById('step-otp').style.display = 'none';
+        document.getElementById('step-phone').style.display = 'block';
+        document.getElementById('login-error').style.display = 'none';
+        document.getElementById('admin-otp').value = '';
+    };
+
+    window.handleVerifyOTP = async () => {
+        const token = document.getElementById('admin-otp').value.trim();
+        const btn = document.getElementById('verify-otp-btn');
+        const errEl = document.getElementById('login-error');
+
+        btn.textContent = 'Verifying…';
+        btn.disabled = true;
+        errEl.style.display = 'none';
+
+        const { data, error } = await supabase.auth.verifyOtp({
+            phone: window._adminPhone,
+            token,
+            type: 'sms'
+        });
+
+        if (error || !data.user) {
+            errEl.textContent = 'Invalid code. Please try again.';
+            errEl.style.display = 'block';
+            btn.textContent = 'Verify & Sign In';
+            btn.disabled = false;
+            return;
+        }
+
+        // Verify ADMIN role
+        const { data: profile } = await supabase
+            .from('profiles')
+            .select('role, full_name')
+            .eq('id', data.user.id)
+            .single();
+
+        if (!profile || profile.role !== 'ADMIN') {
+            await supabase.auth.signOut();
+            errEl.textContent = 'Access denied. This number does not have admin privileges.';
+            errEl.style.display = 'block';
+            btn.textContent = 'Verify & Sign In';
+            btn.disabled = false;
+            return;
+        }
+
+        document.getElementById('admin-greeting').textContent =
+            `Welcome back, ${profile.full_name || 'Admin'}`;
+        showDashboard();
+    };
+
+    window.handleSignout = async () => {
+        await supabase.auth.signOut();
+        document.getElementById('dashboard').style.display = 'none';
+        document.getElementById('login-screen').style.display = 'block';
+        document.getElementById('step-otp').style.display = 'none';
+        document.getElementById('step-phone').style.display = 'block';
+        document.getElementById('admin-phone').value = '';
+        document.getElementById('admin-otp').value = '';
+    };
+
+    // ─── DASHBOARD ─────────────────────────────────────────────────────────────
+
+    async function showDashboard() {
+        document.getElementById('login-screen').style.display = 'none';
+        document.getElementById('dashboard').style.display = 'block';
+        await loadApplicants();
+    }
+
+    async function loadApplicants() {
+        document.getElementById('loading').style.display = 'block';
+        document.getElementById('applications-list').innerHTML = '';
+
+        const { data, error } = await supabase
+            .from('profiles')
+            .select('id, full_name, phone, role, cook_application_status, created_at, location, bio, verified')
+            .not('cook_application_status', 'eq', 'none')
+            .order('created_at', { ascending: false });
+
+        document.getElementById('loading').style.display = 'none';
+
+        if (error) {
+            showToast('Failed to load applications: ' + error.message, 'error');
+            return;
+        }
+
+        allApplicants = data || [];
+        updateStats();
+        renderList(currentFilter);
+    }
+
+    function updateStats() {
+        const pending = allApplicants.filter(a => a.cook_application_status === 'pending').length;
+        const approved = allApplicants.filter(a => a.cook_application_status === 'approved').length;
+        const rejected = allApplicants.filter(a => a.cook_application_status === 'rejected').length;
+        document.getElementById('stat-pending').textContent = pending;
+        document.getElementById('stat-approved').textContent = approved;
+        document.getElementById('stat-rejected').textContent = rejected;
+    }
+
+    function renderList(filter) {
+        const list = filter === 'all'
+            ? allApplicants
+            : allApplicants.filter(a => a.cook_application_status === filter);
+
+        const container = document.getElementById('applications-list');
+
+        if (list.length === 0) {
+            container.innerHTML = `
+                <div class="empty-state">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+                        <rect x="9" y="3" width="6" height="4" rx="2"/></svg>
+                    <p>No ${filter === 'all' ? '' : filter} applications.</p>
+                </div>`;
+            return;
+        }
+
+        container.innerHTML = list.map(app => {
+            const statusClass = `status-${app.cook_application_status}`;
+            const isPending = app.cook_application_status === 'pending';
+            const joinDate = new Date(app.created_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+
+            return `
+            <div class="app-card" id="card-${app.id}">
+                <div class="app-top">
+                    <div>
+                        <div class="app-name">${app.full_name || 'No Name'}</div>
+                        <div class="app-phone">${app.phone || 'No phone'}</div>
+                    </div>
+                    <span class="status-badge ${statusClass}">${app.cook_application_status}</span>
+                </div>
+                <div class="app-meta">
+                    <span><strong>Applied:</strong> ${joinDate}</span>
+                    ${app.location ? `<span><strong>Location:</strong> ${app.location}</span>` : ''}
+                    ${app.verified ? `<span style="color:#34d399;">✓ Verified</span>` : ''}
+                </div>
+                ${app.bio ? `<p style="color:#94a3b8;font-size:0.9rem;margin-bottom:0.5rem;">${app.bio}</p>` : ''}
+                ${isPending ? `
+                <div class="app-actions">
+                    <button class="btn-approve" id="approve-${app.id}" onclick="approveApplicant('${app.id}')">✓ Approve</button>
+                    <button class="btn-reject" id="reject-${app.id}" onclick="rejectApplicant('${app.id}')">✕ Reject</button>
+                </div>` : ''}
+            </div>`;
+        }).join('');
+    }
+
+    window.filterApps = (filter, btn) => {
+        currentFilter = filter;
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        renderList(filter);
+    };
+
+    // ─── APPROVE / REJECT ──────────────────────────────────────────────────────
+
+    window.approveApplicant = async (userId) => {
+        setCardLoading(userId, true);
+        const { error } = await supabase
+            .from('profiles')
+            .update({ cook_application_status: 'approved', role: 'COOK', cook_approved_at: new Date().toISOString() })
+            .eq('id', userId);
+
+        if (error) {
+            showToast('Error: ' + error.message, 'error');
+            setCardLoading(userId, false);
+        } else {
+            showToast('Cook approved! They can now list meals in the app.', 'success');
+            await loadApplicants();
+        }
+    };
+
+    window.rejectApplicant = async (userId) => {
+        setCardLoading(userId, true);
+        const { error } = await supabase
+            .from('profiles')
+            .update({ cook_application_status: 'rejected', role: 'EATER' })
+            .eq('id', userId);
+
+        if (error) {
+            showToast('Error: ' + error.message, 'error');
+            setCardLoading(userId, false);
+        } else {
+            showToast('Application rejected.', 'error');
+            await loadApplicants();
+        }
+    };
+
+    function setCardLoading(userId, loading) {
+        const approve = document.getElementById(`approve-${userId}`);
+        const reject = document.getElementById(`reject-${userId}`);
+        if (approve) approve.classList.toggle('btn-disabled', loading);
+        if (reject) reject.classList.toggle('btn-disabled', loading);
+        if (approve) approve.textContent = loading ? 'Saving…' : '✓ Approve';
+    }
+
+    // ─── TOAST ─────────────────────────────────────────────────────────────────
+
+    function showToast(message, type = 'success') {
+        const toast = document.getElementById('toast');
+        toast.textContent = message;
+        toast.className = `show ${type}`;
+        setTimeout(() => { toast.className = ''; }, 3500);
+    }
+
+    // ─── SESSION CHECK ─────────────────────────────────────────────────────────
+    supabase.auth.getSession().then(async ({ data: { session } }) => {
+        if (!session) return;
+        const { data: profile } = await supabase
+            .from('profiles')
+            .select('role, full_name')
+            .eq('id', session.user.id)
+            .single();
+
+        if (profile?.role === 'ADMIN') {
+            document.getElementById('admin-greeting').textContent =
+                `Welcome back, ${profile.full_name || 'Admin'}`;
+            showDashboard();
+        }
+    });
+</script>
+</body>
+</html>
