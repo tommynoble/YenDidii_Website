@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found – YenDidii</title>
+    <meta name="description" content="Oops! The page you're looking for doesn't exist. Head back to YenDidii and discover homemade meals near you.">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .error-page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .error-main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Decorative blobs */
+        .error-main::before {
+            content: '';
+            position: absolute;
+            top: -5%;
+            left: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(224, 93, 54, 0.07) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .error-main::after {
+            content: '';
+            position: absolute;
+            bottom: -5%;
+            right: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(46, 125, 50, 0.06) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .error-content {
+            text-align: center;
+            max-width: 560px;
+            position: relative;
+            z-index: 1;
+            animation: fadeUp 0.7s cubic-bezier(0.4, 0, 0.2, 1) both;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(32px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Big illustrated 404 */
+        .error-number {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: clamp(7rem, 20vw, 10rem);
+            font-weight: 800;
+            line-height: 1;
+            letter-spacing: -0.05em;
+            background: linear-gradient(135deg, var(--primary) 0%, #F3855E 60%, #FFB300 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Floating food emoji decoration */
+        .food-float {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+
+        .food-float span {
+            display: inline-block;
+            animation: floatBob 3s ease-in-out infinite;
+        }
+
+        .food-float span:nth-child(1) { animation-delay: 0s; }
+        .food-float span:nth-child(2) { animation-delay: 0.4s; }
+        .food-float span:nth-child(3) { animation-delay: 0.8s; }
+
+        @keyframes floatBob {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .error-title {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .error-description {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 2.5rem;
+        }
+
+        .error-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Suggestions */
+        .suggestions {
+            margin-top: 3.5rem;
+            padding-top: 2.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .suggestions p {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 1.2rem;
+        }
+
+        .suggestion-links {
+            display: flex;
+            gap: 0.8rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .suggestion-chip {
+            background-color: white;
+            border: 1px solid var(--border-color);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .suggestion-chip:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background-color: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(224, 93, 54, 0.12);
+        }
+
+        @media (max-width: 520px) {
+            .error-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .error-actions a {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body class="error-page">
+
+    <!-- Navigation -->
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo-group">
+                <div class="logo-icon">Y</div>
+                <span class="logo-text">Yen<span>Didii</span></span>
+            </a>
+            <button class="nav-toggle" aria-label="Toggle menu"
+                onclick="document.querySelector('.nav-container nav').classList.toggle('active'); this.classList.toggle('active');">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html#eaters" class="nav-link">For Eaters</a></li>
+                    <li><a href="index.html#cooks" class="nav-link">For Cooks</a></li>
+                    <li><a href="index.html#map-explore" class="nav-link">Explore Map</a></li>
+                    <li><a href="support.html" class="nav-link">Support</a></li>
+                    <li><a href="index.html#download" class="nav-btn">Download App</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 404 Content -->
+    <main class="error-main">
+        <div class="error-content">
+
+            <div class="food-float">
+                <span>🍲</span>
+                <span>🍛</span>
+                <span>🫕</span>
+            </div>
+
+            <div class="error-number">404</div>
+
+            <h1 class="error-title">This meal has left the menu.</h1>
+
+            <p class="error-description">
+                Looks like the page you're searching for doesn't exist — it may have moved, been removed, or the link was mistyped. Let's get you back to something delicious.
+            </p>
+
+            <div class="error-actions">
+                <a href="index.html" class="btn-primary">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                        <polyline points="9 22 9 12 15 12 15 22"/>
+                    </svg>
+                    Back to Home
+                </a>
+                <a href="support.html" class="btn-secondary">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+                        <line x1="12" y1="17" x2="12.01" y2="17"/>
+                    </svg>
+                    Contact Support
+                </a>
+            </div>
+
+            <!-- Helpful links -->
+            <div class="suggestions">
+                <p>Or explore these pages</p>
+                <div class="suggestion-links">
+                    <a href="index.html#eaters" class="suggestion-chip">
+                        🍽️ For Eaters
+                    </a>
+                    <a href="index.html#cooks" class="suggestion-chip">
+                        👨‍🍳 For Cooks
+                    </a>
+                    <a href="become-cook.html" class="suggestion-chip">
+                        ✨ Become a Cook
+                    </a>
+                    <a href="privacy-policy.html" class="suggestion-chip">
+                        🔒 Privacy Policy
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <div class="footer-logo-row">
+                    <div class="footer-logo-circle"><img src="assets/logo.png" alt="YenDidii Logo"></div>
+                    <h3>Yen<span>Didii</span></h3>
+                </div>
+                <p>The premier foodsharing marketplace connecting passionate home cooks and local food lovers in Ghana and beyond.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Explore</h4>
+                <ul>
+                    <li><a href="index.html#eaters">For Eaters</a></li>
+                    <li><a href="index.html#cooks">For Cooks</a></li>
+                    <li><a href="index.html#map-explore">Map View</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Legal & Support</h4>
+                <ul>
+                    <li><a href="support.html">Contact Support</a></li>
+                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Partners</h4>
+                <ul>
+                    <li><a href="become-cook.html">Become a Cook</a></li>
+                    <li><a href="cook-training.html">Cook Training</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 YenDidii. All rights reserved.</p>
+            <p>Made with love for the local community.</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>
