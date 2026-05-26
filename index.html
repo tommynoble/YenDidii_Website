@@ -7,7 +7,88 @@
     <title>YenDidii - Discover & Share Homemade Meals</title>
     <meta name="description"
         content="Connect with local home cooks, discover fresh homemade meals, and share the joy of cooking in your neighborhood.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/logo.png">
+    <link rel="apple-touch-icon" href="assets/logo.png">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yendidii.com/">
+    <meta property="og:title" content="YenDidii — Discover & Share Homemade Meals">
+    <meta property="og:description" content="Connect with local home cooks, discover fresh homemade meals, and share the joy of cooking in your neighborhood.">
+    <meta property="og:image" content="https://yendidii.com/assets/logo.png">
+    <meta property="og:site_name" content="YenDidii">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="YenDidii — Discover & Share Homemade Meals">
+    <meta name="twitter:description" content="Connect with local home cooks, discover fresh homemade meals, and share the joy of cooking in your neighborhood.">
+    <meta name="twitter:image" content="https://yendidii.com/assets/logo.png">
+
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#E05D36">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://yendidii.com/">
+
+    <!-- SEO Keywords -->
+    <meta name="keywords" content="homemade food Ghana, home cooking Accra, local food delivery, Ghanaian food, food sharing app, home cook marketplace, YenDidii, jollof rice delivery, local meals near me">
+
     <link rel="stylesheet" href="styles.css">
+
+    <!-- Google Analytics (GA4) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script>
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "WebSite",
+                "name": "YenDidii",
+                "url": "https://yendidii.com",
+                "description": "The premier foodsharing marketplace connecting passionate home cooks with local food lovers in Ghana.",
+                "potentialAction": {
+                    "@type": "SearchAction",
+                    "target": "https://yendidii.com/?q={search_term_string}",
+                    "query-input": "required name=search_term_string"
+                }
+            },
+            {
+                "@type": "Organization",
+                "name": "YenDidii",
+                "url": "https://yendidii.com",
+                "logo": "https://yendidii.com/assets/logo.png",
+                "sameAs": [],
+                "contactPoint": {
+                    "@type": "ContactPoint",
+                    "email": "support@yendidii.com",
+                    "contactType": "customer support"
+                }
+            },
+            {
+                "@type": "SoftwareApplication",
+                "name": "YenDidii",
+                "operatingSystem": "iOS, Android",
+                "applicationCategory": "FoodEstablishment",
+                "description": "Discover and order fresh homemade meals from passionate home cooks in your neighborhood.",
+                "offers": {
+                    "@type": "Offer",
+                    "price": "0",
+                    "priceCurrency": "GHS"
+                }
+            }
+        ]
+    }
+    </script>
 </head>
 
 <body>
