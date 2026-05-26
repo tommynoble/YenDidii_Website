@@ -15,6 +15,11 @@
                 <div class="logo-icon">Y</div>
                 <span class="logo-text">Yen<span>Didii</span></span>
             </a>
+            <button class="nav-toggle" aria-label="Toggle menu" onclick="document.querySelector('.nav-container nav').classList.toggle('active'); this.classList.toggle('active');">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
             <nav>
                 <ul class="nav-links">
                     <li><a href="index.html#eaters" class="nav-link">For Eaters</a></li>
@@ -119,5 +124,17 @@
             <p>Made with love for the local community.</p>
         </div>
     </footer>
+
+    <script>
+        // Close mobile menu when links are clicked
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                const navMenu = document.querySelector('.nav-container nav');
+                const navToggle = document.querySelector('.nav-toggle');
+                if (navMenu) navMenu.classList.remove('active');
+                if (navToggle) navToggle.classList.remove('active');
+            });
+        });
+    </script>
 </body>
 </html>
