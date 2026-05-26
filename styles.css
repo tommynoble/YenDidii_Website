@@ -38,6 +38,11 @@
   scroll-behavior: smooth;
 }
 
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+}
+
 body {
   font-family: 'Outfit', sans-serif;
   background-color: var(--bg-main);
