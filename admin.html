@@ -134,22 +134,12 @@
         </div>
         <h2>Admin Portal</h2>
 
-        <!-- Step 1: Phone -->
-        <div id="step-phone">
-            <p>Enter your phone number to receive a verification code.</p>
-            <div style="display:flex;gap:0.5rem;margin-bottom:1rem;">
-                <input type="text" value="+44" id="phone-prefix" style="width:70px;text-align:center;" readonly>
-                <input type="tel" id="admin-phone" placeholder="7868024799" style="flex:1;">
-            </div>
-            <button class="btn-login" id="send-otp-btn" onclick="handleSendOTP()">Send Code</button>
-        </div>
-
-        <!-- Step 2: OTP -->
-        <div id="step-otp" style="display:none;">
-            <p id="otp-hint">Enter the 6-digit code sent to your phone.</p>
-            <input type="number" id="admin-otp" placeholder="123456" style="letter-spacing:0.3em;text-align:center;font-size:1.4rem;">
-            <button class="btn-login" id="verify-otp-btn" onclick="handleVerifyOTP()">Verify &amp; Sign In</button>
-            <p style="margin-top:0.8rem;"><button onclick="backToPhone()" style="background:none;border:none;color:#64748b;cursor:pointer;font-family:inherit;font-size:0.85rem;">← Use different number</button></p>
+        <!-- Email & Password Form -->
+        <div id="step-login">
+            <p>Sign in with your admin credentials.</p>
+            <input type="email" id="admin-email" placeholder="admin@yendidii.com" style="margin-bottom:1rem;">
+            <input type="password" id="admin-password" placeholder="Password" style="margin-bottom:1.5rem;">
+            <button class="btn-login" id="login-btn" onclick="handleEmailSignIn()">Sign In</button>
         </div>
 
         <p id="login-error" style="color:#f87171;font-size:0.9rem;margin-top:0.75rem;display:none;">Something went wrong. Please try again.</p>
@@ -207,62 +197,25 @@
 
     // ─── AUTH ──────────────────────────────────────────────────────────────────
 
-    window.handleSendOTP = async () => {
-        const prefix = document.getElementById('phone-prefix').value.trim();
-        const number = document.getElementById('admin-phone').value.trim();
-        const fullPhone = prefix + number;
-        const btn = document.getElementById('send-otp-btn');
+    window.handleEmailSignIn = async () => {
+        const email = document.getElementById('admin-email').value.trim();
+        const password = document.getElementById('admin-password').value;
+        const btn = document.getElementById('login-btn');
         const errEl = document.getElementById('login-error');
 
-        btn.textContent = 'Sending…';
+        btn.textContent = 'Signing in…';
         btn.disabled = true;
         errEl.style.display = 'none';
 
-        const { error } = await supabase.auth.signInWithOtp({ phone: fullPhone });
-
-        if (error) {
-            errEl.textContent = error.message;
-            errEl.style.display = 'block';
-            btn.textContent = 'Send Code';
-            btn.disabled = false;
-            return;
-        }
-
-        document.getElementById('otp-hint').textContent =
-            `Code sent to ${fullPhone}. Check your messages.`;
-        document.getElementById('step-phone').style.display = 'none';
-        document.getElementById('step-otp').style.display = 'block';
-        btn.textContent = 'Send Code';
-        btn.disabled = false;
-        window._adminPhone = fullPhone;
-    };
-
-    window.backToPhone = () => {
-        document.getElementById('step-otp').style.display = 'none';
-        document.getElementById('step-phone').style.display = 'block';
-        document.getElementById('login-error').style.display = 'none';
-        document.getElementById('admin-otp').value = '';
-    };
-
-    window.handleVerifyOTP = async () => {
-        const token = document.getElementById('admin-otp').value.trim();
-        const btn = document.getElementById('verify-otp-btn');
-        const errEl = document.getElementById('login-error');
-
-        btn.textContent = 'Verifying…';
-        btn.disabled = true;
-        errEl.style.display = 'none';
-
-        const { data, error } = await supabase.auth.verifyOtp({
-            phone: window._adminPhone,
-            token,
-            type: 'sms'
+        const { data, error } = await supabase.auth.signInWithPassword({
+            email,
+            password
         });
 
         if (error || !data.user) {
-            errEl.textContent = 'Invalid code. Please try again.';
+            errEl.textContent = error?.message || 'Login failed. Please try again.';
             errEl.style.display = 'block';
-            btn.textContent = 'Verify & Sign In';
+            btn.textContent = 'Sign In';
             btn.disabled = false;
             return;
         }
@@ -276,9 +229,9 @@
 
         if (!profile || profile.role !== 'ADMIN') {
             await supabase.auth.signOut();
-            errEl.textContent = 'Access denied. This number does not have admin privileges.';
+            errEl.textContent = 'Access denied. This account does not have admin privileges.';
             errEl.style.display = 'block';
-            btn.textContent = 'Verify & Sign In';
+            btn.textContent = 'Sign In';
             btn.disabled = false;
             return;
         }
@@ -292,10 +245,8 @@
         await supabase.auth.signOut();
         document.getElementById('dashboard').style.display = 'none';
         document.getElementById('login-screen').style.display = 'block';
-        document.getElementById('step-otp').style.display = 'none';
-        document.getElementById('step-phone').style.display = 'block';
-        document.getElementById('admin-phone').value = '';
-        document.getElementById('admin-otp').value = '';
+        document.getElementById('admin-email').value = '';
+        document.getElementById('admin-password').value = '';
     };
 
     // ─── DASHBOARD ─────────────────────────────────────────────────────────────
