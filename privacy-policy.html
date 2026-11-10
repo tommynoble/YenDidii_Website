@@ -44,11 +44,12 @@
             </button>
             <nav>
                 <ul class="nav-links">
-                    <li><a href="index.html#eaters" class="nav-link">For Eaters</a></li>
-                    <li><a href="index.html#cooks" class="nav-link">For Cooks</a></li>
+                    <li><a href="index.html#eaters" class="nav-link">For Guests</a></li>
+                    <li><a href="index.html#cooks" class="nav-link">For Hosts</a></li>
                     <li><a href="index.html#map-explore" class="nav-link">Explore Map</a></li>
                     <li><a href="support.html" class="nav-link">Support</a></li>
                     <li><a href="privacy-policy.html" class="nav-link" style="color: var(--primary);">Privacy Policy</a></li>
+                    <li><a href="terms.html" class="nav-link">Terms</a></li>
                     <li><a href="index.html#download" class="nav-btn">Download App</a></li>
                 </ul>
             </nav>
@@ -58,38 +59,69 @@
     <main class="legal-container">
         <div class="legal-card">
             <h1>Privacy Policy</h1>
-            <p class="legal-meta">Last updated: May 20, 2026</p>
-            
+            <p class="legal-meta">Last updated: November 10, 2026</p>
+
             <div class="legal-content">
                 <h2>1. Introduction</h2>
-                <p>Welcome to YenDidii. We respect your privacy and are committed to protecting your personal data. This privacy policy explains how we collect, process, and protect your information when you use our mobile application and our web services.</p>
+                <p>Welcome to YenDidii. We respect your privacy and are committed to protecting your personal data. This privacy policy explains how we collect, use, share and protect your information when you use our mobile application and our website at yendidii.com.</p>
 
                 <h2>2. Data We Collect</h2>
-                <p>To provide you with the best experience, we collect information when you create an account, browse food, list meals, or make transactions:</p>
+                <p>We collect information when you create an account, browse gatherings, host events, or make bookings:</p>
                 <ul>
-                    <li><strong>Identity Data:</strong> Name, phone number, and account profile details (such as whether you are registered as a Cook or an Eater).</li>
-                    <li><strong>Location Data:</strong> Live geographical coordinates. This is required to calculate distances to nearby cooks, show listings in the Map View, and coordinate food handovers.</li>
-                    <li><strong>Financial Data:</strong> Payments are processed via Paystack. We do not store full credit card details on our servers. We store payment status and transaction history.</li>
-                    <li><strong>Content Data:</strong> Food listing titles, descriptions, categories (e.g. Rice Dishes, Soups & Stews), pricing, portion count, and photos uploaded by cooks.</li>
+                    <li><strong>Account Data:</strong> Your name, email address, phone number (if you provide one), profile photo, and whether you use YenDidii as a guest or as a host.</li>
+                    <li><strong>Sign-in with Google:</strong> If you choose to continue with Google, we receive your name, email address and profile picture from your Google account. We use this only to create and sign you in to your YenDidii account. We do not receive your Google password, and we do not access your Google contacts, Drive, Gmail or any other Google data.</li>
+                    <li><strong>Location Data:</strong> Your approximate location, if you allow it, to show gatherings near you and calculate distances on the map. Hosts also give the address of their gathering, which is shared with confirmed guests.</li>
+                    <li><strong>Booking and Payment Data:</strong> Payments are processed by Paystack. We do not store full card details on our servers. We store your bookings, payment status and transaction history.</li>
+                    <li><strong>Taste Profile:</strong> Food, vibe and dining preferences you choose when you join. Allergies and dietary needs you add are private and are only shared with hosts you book.</li>
+                    <li><strong>Content You Post:</strong> Event titles, descriptions, categories, prices, seat numbers and photos posted by hosts, plus messages and reviews you send in the app.</li>
+                    <li><strong>Device Data:</strong> A push notification token for your phone so we can send booking updates you have allowed, and basic technical information needed to keep the app working.</li>
+                    <li><strong>Crash Reports:</strong> If the app crashes, we may receive a crash report from our error-monitoring provider (Sentry) with technical details such as your device model, operating system version and what the app was doing. It is used only to find and fix problems.</li>
                 </ul>
 
                 <h2>3. How We Use Your Data</h2>
-                <p>We process your data for the following reasons:</p>
                 <ul>
-                    <li>To authenticate your profile (Thomas Cook, Tamara Badu, etc.) and save user preferences.</li>
-                    <li>To display active cooks and meals on the map within the Explore interface.</li>
-                    <li>To coordinate order delivery or pickup times.</li>
-                    <li>To manage kitchen sessions, payouts, and revenue metrics on the Cook Dashboard.</li>
+                    <li>To create your account, sign you in and keep your preferences.</li>
+                    <li>To show gatherings and hosts near you on the Home screen and the Explore map.</li>
+                    <li>To process bookings, payments, host payouts and refunds.</li>
+                    <li>To send notifications about your bookings and messages.</li>
+                    <li>To keep the community safe, prevent fraud and provide support.</li>
                 </ul>
 
-                <h2>4. Data Sharing</h2>
-                <p>We do not sell your personal data. We only share information necessary to fulfill orders (e.g. sharing your phone number or name with the Cook when you order, or with the Eater when they are coming to collect a dish).</p>
+                <h2>4. What Other People Can See</h2>
+                <p>On a gathering you have booked, other guests may see your first name and profile photo, for example in the "Who's at the Table" section and in the small row of faces on an event card. We never show your last name, email, phone number, allergies or payment details to other guests. Hosts see the details they need to host you, such as your name and any dietary needs you shared.</p>
 
-                <h2>5. Data Security</h2>
-                <p>All data is transferred securely using modern encryption protocols (HTTPS/SSL) and backed by Supabase infrastructure. We maintain rigorous standards to ensure your account details and order records remain private.</p>
+                <h2>5. Data Sharing</h2>
+                <p>We do not sell your personal data. We share information only where needed to run YenDidii:</p>
+                <ul>
+                    <li><strong>Hosts and guests</strong>, as described above, to make a gathering happen.</li>
+                    <li><strong>Service providers</strong> who help us run the service: Supabase (database, sign-in and file storage), Paystack (payments), Google (sign-in), Expo (push notifications) and Sentry (crash reports). They only process data on our behalf.</li>
+                    <li><strong>Legal reasons</strong>, if we are required to by law or to protect people's safety.</li>
+                </ul>
 
-                <h2>6. Your Rights</h2>
-                <p>You can edit your profile information or delete your account at any time directly through the Profile tab in the application. For further inquiries or data removal requests, please contact us at support@yendidii.com.</p>
+                <h2>6. Data Security</h2>
+                <p>Data is transferred using modern encryption (HTTPS) and stored on Supabase infrastructure with access controls so that people can only see what they are allowed to see. No system is perfectly secure, but we work to keep your account and booking records private.</p>
+
+                <h2>7. How Long We Keep Data and Deleting Your Account</h2>
+                <p>We keep your data while your account is active. You can delete your account at any time in the app: go to Profile, then Privacy &amp; Security, then Delete Account. When you confirm, your account, profile, preferences and the bookings, messages and uploaded photos linked to it are permanently deleted straight away. This cannot be undone. Copies may remain in routine system backups for a limited time before they are overwritten. Payment records held by our payment provider (Paystack) are kept for as long as tax and accounting law requires.</p>
+
+                <h2>8. Where Your Data Is Stored</h2>
+                <p>YenDidii uses service providers that may process your data in countries other than where you live, including the United Kingdom, the European Union, the United States and Ghana. Where we do this, we rely on providers that protect personal data to a standard that meets the law.</p>
+
+                <h2>9. Your Rights and Choices</h2>
+                <p>You can edit your profile and preferences at any time in the app. You can delete your account in the app, as described in section 7. Depending on where you live, laws such as the UK GDPR and Ghana's Data Protection Act, 2012 (Act 843) also give you the right to access, correct, delete, restrict or move your data, and to object to how we use it. To use these rights, email hello@yendidii.com. If you are not happy with our answer, you can complain to the data protection regulator where you live, such as the Information Commissioner's Office (UK) or the Data Protection Commission (Ghana).</p>
+                <p><strong>Turning things off:</strong> you can stop us using your location or sending notifications at any time in your phone's Settings, then YenDidii. The app still works without them, but nearby gatherings and booking alerts will not.</p>
+
+                <h2>10. Who We Are</h2>
+                <p>YenDidii is the controller of the personal data described in this policy. You can reach us at hello@yendidii.com.</p>
+
+                <h2>11. Children</h2>
+                <p>YenDidii is for people aged 18 and over. We do not knowingly collect data from anyone under 18.</p>
+
+                <h2>12. Tracking and Advertising</h2>
+                <p>YenDidii does not track you across other companies' apps or websites for advertising. We do not use advertising networks, we do not collect or share Apple's Identifier for Advertisers (IDFA), and we do not sell your personal data or share it with data brokers.</p>
+
+                <h2>13. Changes and Contact</h2>
+                <p>We may update this policy and will change the date above when we do. Questions? Contact us at hello@yendidii.com.</p>
             </div>
         </div>
     </main>
@@ -102,13 +134,13 @@
                     <div class="footer-logo-circle"><img src="assets/logo.png" alt="YenDidii Logo"></div>
                     <h3>Yen<span>Didii</span></h3>
                 </div>
-                <p>The premier foodsharing marketplace connecting passionate home cooks and local food lovers in Ghana and beyond.</p>
+                <p>The premier foodsharing marketplace connecting passionate home hosts and local food lovers in Ghana and beyond.</p>
             </div>
             <div class="footer-links">
                 <h4>Explore</h4>
                 <ul>
-                    <li><a href="index.html#eaters">For Eaters</a></li>
-                    <li><a href="index.html#cooks">For Cooks</a></li>
+                    <li><a href="index.html#eaters">For Guests</a></li>
+                    <li><a href="index.html#cooks">For Hosts</a></li>
                     <li><a href="index.html#map-explore">Map View</a></li>
                 </ul>
             </div>
@@ -117,13 +149,14 @@
                 <ul>
                     <li><a href="support.html">Contact Support</a></li>
                     <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
                 </ul>
             </div>
             <div class="footer-links">
                 <h4>Partners</h4>
                 <ul>
-                    <li><a href="become-cook.html">Become a Cook</a></li>
-                    <li><a href="cook-training.html">Cook Training</a></li>
+                    <li><a href="become-cook.html">Become a Host</a></li>
+                    <li><a href="cook-training.html">Host Training</a></li>
                     <li><a href="admin.html" style="opacity:0.5;font-size:0.85rem;">Admin Portal</a></li>
                 </ul>
             </div>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YenDidii Admin — Cook Applications</title>
+    <title>YenDidii Admin — Host Applications</title>
     <link rel="stylesheet" href="styles.css">
     <style>
         body { background: #0f172a; color: #e2e8f0; min-height: 100vh; }
@@ -150,7 +150,7 @@
 <div id="dashboard" class="admin-wrap">
     <div class="admin-header">
         <div>
-            <h1>Cook Applications</h1>
+            <h1>Host Applications</h1>
             <span id="admin-greeting">Welcome back, Admin</span>
         </div>
         <button class="btn-signout" onclick="handleSignout()">Sign Out</button>
@@ -163,7 +163,7 @@
         </div>
         <div class="stat-card approved">
             <div class="num" id="stat-approved">—</div>
-            <div class="label">Approved Cooks</div>
+            <div class="label">Approved Hosts</div>
         </div>
         <div class="stat-card rejected">
             <div class="num" id="stat-rejected">—</div>
@@ -358,7 +358,7 @@
             showToast('Error: ' + error.message, 'error');
             setCardLoading(userId, false);
         } else {
-            showToast('Cook approved! They can now list meals in the app.', 'success');
+            showToast('Host approved! They can now list gatherings in the app.', 'success');
             await loadApplicants();
         }
     };
