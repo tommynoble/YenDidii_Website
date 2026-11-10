@@ -27,7 +27,7 @@
     <meta name="twitter:image" content="https://yendidii.com/assets/logo.png">
 
     <!-- Theme Color -->
-    <meta name="theme-color" content="#E05D36">
+    <meta name="theme-color" content="#C25327">
 
     <!-- Canonical URL -->
     <link rel="canonical" href="https://yendidii.com/">
@@ -89,6 +89,7 @@
         ]
     }
     </script>
+    <script>document.documentElement.classList.add('js');</script>
 </head>
 
 <body>
@@ -122,18 +123,14 @@
     <section class="hero">
         <div class="hero-grid">
             <div class="hero-content">
-                <div class="badge">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="2.5">
-                        <path
-                            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                    </svg>
-                    The Premier Foodsharing Marketplace
-                </div>
-                <h1>Taste the <span>neighborhood.</span></h1>
-                <p>YenDidii connects passionate home hosts with hungry neighbors. Discover fresh, authentic, and
-                    delicious homemade meals made right next door.</p>
-                <div class="hero-ctas">
+                <h1>Pull up a chair at a <span>Ghanaian table.</span></h1>
+                <p>YenDidii connects guests with home hosts for warm, home-cooked dinners. Find a gathering near you, reserve a seat, and eat at the host's table.</p>
+                <ul class="hero-points">
+                    <li>Dine-in at a host's home</li>
+                    <li>Reserve seats in the app</li>
+                    <li>Secure payment with Paystack</li>
+                </ul>
+                <div class="hero-ctas" style="margin-top: 2rem;">
                     <a href="#download" class="btn-primary">
                         <span>Get Started</span>
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -145,63 +142,77 @@
                     <a href="#eaters" class="btn-secondary">Explore Features</a>
                 </div>
             </div>
-            <div class="mockup-wrapper">
-                <div class="mockup-container">
-                    <div class="mockup-screen">
-                        <img src="assets/media__1779264746437.png" alt="YenDidii Feed Screen">
-                    </div>
+            <div class="mode-mockups hero-mockups">
+                <img fetchpriority="high" decoding="async" class="app-screenshot" src="assets/screens/guest-listing.jpg" alt="A gathering on YenDidii: see what is on the table before you reserve a seat">
+                <img fetchpriority="high" decoding="async" class="app-screenshot screenshot-offset" src="assets/screens/guest-discover.jpg" alt="YenDidii home screen: pull up a chair at a Ghanaian table"
+                    style="margin-left: -60px; z-index: 2;">
+            </div>
+        </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="steps" id="how-it-works">
+        <div class="section-title reveal">
+            <h2>How it works</h2>
+            <p>Three simple steps from hungry to seated.</p>
+        </div>
+        <div class="steps-grid reveal">
+            <div class="step-card reveal" style="--d:0s; --nd:0.6s">
+                <div class="step-number">1</div>
+                <div class="step-icon">
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
                 </div>
-                <div class="mockup-container-secondary">
-                    <div class="mockup-screen">
-                        <img src="assets/media__1779264755404.png" alt="YenDidii Food Detail Screen">
-                    </div>
+                <h3>Find a table</h3>
+                <p>Browse gatherings near you on the home screen or the map, with real photos, dates and prices.</p>
+            </div>
+            <div class="step-card reveal d1" style="--d:0.18s; --nd:1.35s">
+                <div class="step-number">2</div>
+                <div class="step-icon">
+                    <svg width="20" height="26" viewBox="28 4 15 20" fill="none" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"><path d="M29.4 4.7V11M34.6 4.7V11M29.4 11a2.6 2.6 0 0 0 5.2 0M32 4.7V23.3M41.6 23.3V4.7c-2.2 0-3.9 2.2-3.9 5v4.9h3.9"/></svg>
                 </div>
+                <h3>Reserve your seat</h3>
+                <p>Choose your seats, tell the host about any allergies, and pay securely with mobile money or card.</p>
+            </div>
+            <div class="step-card reveal d2" style="--d:0.36s; --nd:2.1s">
+                <div class="step-number">3</div>
+                <div class="step-icon">
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                </div>
+                <h3>Dine at your host's table</h3>
+                <p>Arrive at the time shown and enjoy a home-cooked meal with your host and fellow guests.</p>
             </div>
         </div>
     </section>
 
     <!-- For Eaters Section -->
     <section id="eaters" class="modes-section">
-        <div class="section-title">
-            <h2>For Food Lovers & Guests</h2>
-            <p>Craving something authentic? Skip the fast food and get access to fresh, home-cooked local specialties
-                prepared with love by hosts in your community.</p>
+        <div class="section-title reveal">
+            <h2>For Guests</h2>
+            <p>Skip the restaurant queue. Share a table with a Ghanaian host, taste home cooking you won't find on a menu, and meet people from your community.</p>
         </div>
 
-        <div class="mode-row">
+        <div class="mode-row reveal">
             <div class="mode-content">
-                <div class="badge" style="background-color: var(--secondary-bg); color: var(--secondary);">
-                    Guest Experience
-                </div>
                 <h3>A welcoming home dining experience.</h3>
-                <p>Eat fresh homemade meals right at the host's place. Connect with local families, enjoy welcoming Ghanaian hospitality, and experience authentic communal dining in your neighborhood.</p>
+                <p>Eat fresh homemade meals right at the host's place. Meet local families, enjoy welcoming Ghanaian hospitality, and experience communal dining in your neighborhood.</p>
                 <ul class="features-list">
                     <li>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2.5">
-                            <polyline points="20 6 9 17 4 12" />
-                        </svg>
-                        <span><strong>Dine-In or Pick Up:</strong> Choose to eat at the host's table for a warm, welcoming home experience, or grab your food to go.</span>
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg>
+                        <span><strong>Dine-in at the host's home:</strong> You eat at the host's table for a warm, welcoming home experience. Every gathering shows its date, time and how many seats are left.</span>
                     </li>
                     <li>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2.5">
-                            <polyline points="20 6 9 17 4 12" />
-                        </svg>
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.35-7-10a4 4 0 0 1 7-2.65A4 4 0 0 1 19 11c0 5.65-7 10-7 10z"/></svg>
                         <span><strong>Traditional Hospitality:</strong> Savor authentic local dishes like Jollof, Fufu & Light Soup, and Banku & Tilapia, cooked with passion in real Ghanaian home kitchens.</span>
                     </li>
                     <li>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2.5">
-                            <polyline points="20 6 9 17 4 12" />
-                        </svg>
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><circle cx="10" cy="7" r="4"/><path d="M21 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                         <span><strong>Communal Connections:</strong> Meet the talented neighbors preparing your food and support your community directly.</span>
                     </li>
                 </ul>
             </div>
             <div class="mode-mockups">
-                <img class="app-screenshot" src="assets/media__1779264746437.png" alt="Feed screen">
-                <img class="app-screenshot screenshot-offset" src="assets/media__1779264755404.png" alt="Detail screen"
+                <img loading="lazy" decoding="async" class="app-screenshot" src="assets/screens/guest-order-journey.jpg" alt="Order details: follow your night step by step">
+                <img loading="lazy" decoding="async" class="app-screenshot screenshot-offset" src="assets/screens/guest-loyalty.jpg" alt="Sankofa rewards and your taste profile"
                     style="margin-left: -60px; z-index: 2;">
             </div>
         </div>
@@ -209,13 +220,12 @@
 
     <!-- For Cooks Section -->
     <section id="cooks" class="modes-section" style="background-color: var(--bg-main);">
-        <div class="section-title">
+        <div class="section-title reveal">
             <h2>For Hosts</h2>
-            <p>Turn your passion for cooking into a rewarding business. Share your delicious creations and monetize your
-                culinary skills without the overhead of a restaurant.</p>
+            <p>Turn your love of cooking into income. Invite guests to your table, share your signature dishes, and earn without the overhead of a restaurant.</p>
         </div>
 
-        <div class="mode-row reversed">
+        <div class="mode-row reversed reveal">
             <div class="mode-content">
                 <div class="badge">
                     Host Experience
@@ -225,86 +235,105 @@
                     available portions, and track your revenue in real time.</p>
                 <ul class="features-list">
                     <li>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2.5">
-                            <polyline points="20 6 9 17 4 12" />
-                        </svg>
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
                         <span><strong>Kitchen Dashboard:</strong> Monitor your active sessions, orders, and total
                             revenue.</span>
                     </li>
                     <li>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2.5">
-                            <polyline points="20 6 9 17 4 12" />
-                        </svg>
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
                         <span><strong>Flexible Scheduling:</strong> Start cooking sessions whenever you're ready and
                             toggle your status to open or closed.</span>
                     </li>
                     <li>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2.5">
-                            <polyline points="20 6 9 17 4 12" />
-                        </svg>
+                        <svg width="22" height="22" viewBox="0 0 16 21" fill="currentColor"><path d="M12.012 14C12.8453 14 13.5537 14.2917 14.137 14.875C14.7203 15.4583 15.012 16.1667 15.012 17C15.012 17.8333 14.7203 18.5417 14.137 19.125C13.5537 19.7083 12.8453 20 12.012 20C11.3787 20 10.8078 19.8167 10.2995 19.45C9.79117 19.0833 9.42867 18.6 9.212 18H2.862L1.862 19.55C1.712 19.7833 1.4995 19.9292 1.2245 19.9875C0.9495 20.0458 0.695333 20 0.462 19.85C0.228667 19.7 0.0828333 19.4875 0.0245 19.2125C-0.0338333 18.9375 0.012 18.6833 0.162 18.45L4.112 12.4C2.912 11.85 1.92867 11.0042 1.162 9.8625C0.395333 8.72083 0.012 7.43333 0.012 6H14.012C14.012 7.43333 13.6287 8.72083 12.862 9.8625C12.0953 11.0042 11.112 11.85 9.912 12.4L10.487 13.3C10.137 13.4667 9.8495 13.6333 9.6245 13.8C9.3995 13.9667 9.15367 14.2 8.887 14.5L7.887 12.95C7.75367 12.9833 7.612 13 7.462 13C7.312 13 7.162 13 7.012 13C6.862 13 6.712 13 6.562 13C6.412 13 6.27033 12.9833 6.137 12.95L4.162 16H9.212C9.42867 15.4 9.79117 14.9167 10.2995 14.55C10.8078 14.1833 11.3787 14 12.012 14ZM12.012 18C12.2953 18 12.5328 17.9042 12.7245 17.7125C12.9162 17.5208 13.012 17.2833 13.012 17C13.012 16.7167 12.9162 16.4792 12.7245 16.2875C12.5328 16.0958 12.2953 16 12.012 16C11.7287 16 11.4912 16.0958 11.2995 16.2875C11.1078 16.4792 11.012 16.7167 11.012 17C11.012 17.2833 11.1078 17.5208 11.2995 17.7125C11.4912 17.9042 11.7287 18 12.012 18ZM7.012 11C8.012 11 8.9245 10.725 9.7495 10.175C10.5745 9.625 11.1953 8.9 11.612 8H2.412C2.84533 8.9 3.47033 9.625 4.287 10.175C5.10367 10.725 6.012 11 7.012 11ZM4.412 5C4.49533 4.51667 4.48283 4.10833 4.3745 3.775C4.26617 3.44167 4.037 3.05833 3.687 2.625C3.35367 2.19167 3.13283 1.77917 3.0245 1.3875C2.91617 0.995833 2.90367 0.533333 2.987 0H3.987C3.90367 0.483333 3.91617 0.8875 4.0245 1.2125C4.13283 1.5375 4.362 1.91667 4.712 2.35C5.062 2.78333 5.287 3.19583 5.387 3.5875C5.487 3.97917 5.49533 4.45 5.412 5H4.412ZM6.912 5C6.99533 4.51667 6.987 4.10833 6.887 3.775C6.787 3.44167 6.562 3.05833 6.212 2.625C5.862 2.20833 5.63283 1.80417 5.5245 1.4125C5.41617 1.02083 5.40367 0.55 5.487 0H6.487C6.40367 0.483333 6.41617 0.8875 6.5245 1.2125C6.63283 1.5375 6.862 1.91667 7.212 2.35C7.54533 2.76667 7.76617 3.17083 7.8745 3.5625C7.98283 3.95417 7.99533 4.43333 7.912 5H6.912ZM9.412 5C9.49533 4.51667 9.487 4.10833 9.387 3.775C9.287 3.44167 9.062 3.05833 8.712 2.625C8.362 2.20833 8.13283 1.80417 8.0245 1.4125C7.91617 1.02083 7.90367 0.55 7.987 0H8.987C8.90367 0.483333 8.91617 0.8875 9.0245 1.2125C9.13283 1.5375 9.362 1.91667 9.712 2.35C10.0453 2.76667 10.2662 3.17083 10.3745 3.5625C10.4828 3.95417 10.4953 4.43333 10.412 5H9.412Z"/></svg>
                         <span><strong>Instant Swaps:</strong> One account is all you need to swap seamlessly between
                             guest and host modes.</span>
                     </li>
                 </ul>
             </div>
             <div class="mode-mockups">
-                <img class="app-screenshot" src="assets/media__1779264794243.png" alt="Profile screen">
-                <img class="app-screenshot screenshot-offset" src="assets/media__1779264804222.png"
-                    alt="Kitchen Dashboard" style="margin-left: -60px; z-index: 2;">
+                <img loading="lazy" decoding="async" class="app-screenshot" src="assets/screens/host-become.jpg" alt="Become a host in minutes">
+                <img loading="lazy" decoding="async" class="app-screenshot screenshot-offset" src="assets/screens/host-bookings.jpg" alt="Manage every guest and seat"
+                    style="margin-left: -60px; z-index: 2;">
             </div>
         </div>
     </section>
 
-    <!-- Map Feature Section -->
-    <section id="map-explore" class="map-highlight">
-        <div class="map-grid">
-            <div class="map-screenshot-container">
-                <div class="map-header">
-                    <h4>Interactive Host Discovery</h4>
-                    <span class="map-badge">5 Hosts Nearby</span>
-                </div>
-                <img src="assets/media__1779264783438.png" alt="Map View of Nearby Hosts">
+    <!-- Map Feature Section: bento box -->
+    <section id="map-explore" class="map-highlight bento-section">
+        <div class="section-title reveal">
+            <h2>Find a table in your neighborhood.</h2>
+            <p>Open the map to see gatherings around you, check prices at a glance, and see how far each one is.</p>
+        </div>
+
+        <div class="bento">
+            <div class="bento-tile bento-map reveal">
+                <img src="assets/screens/guest-explore.jpg" loading="lazy" alt="Explore map: find a table near you">
             </div>
-            <div class="map-content">
-                <div class="badge" style="background-color: var(--secondary-bg); color: var(--secondary);">
-                    Geospatial Discovery
+
+            <div class="bento-tile bento-near reveal d1">
+                <div class="bento-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
                 </div>
-                <h2>Find hosts in your immediate vicinity.</h2>
-                <p>With our advanced Map View, you can locate hosts in your local area, check active menu prices
-                    instantly through price pills, and view location distances.</p>
-                <ul class="features-list">
-                    <li>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2.5">
-                            <polyline points="20 6 9 17 4 12" />
-                        </svg>
-                        <span><strong>Real-time Location:</strong> Discover who is active in Adenta and surrounding
-                            neighborhoods.</span>
-                    </li>
-                    <li>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2.5">
-                            <polyline points="20 6 9 17 4 12" />
-                        </svg>
-                        <span><strong>Visual Map Pins:</strong> See real food photos directly on the map marker to know
-                            exactly what is cooking nearby.</span>
-                    </li>
-                </ul>
+                <h3>Gatherings near you</h3>
+                <p>See upcoming gatherings in your area, with the date, time and seats left.</p>
+                <div class="bento-pills">
+                    <span class="price-pill">₵45</span>
+                    <span class="price-pill">₵60</span>
+                    <span class="price-pill">₵70</span>
+                    <span class="price-pill price-pill-soft">₵200</span>
+                </div>
+            </div>
+
+            <div class="bento-tile bento-photo reveal d2">
+                <div class="bento-photo-text">
+                    <div class="bento-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                    </div>
+                    <h3>See the dish before you tap</h3>
+                    <p>Every map pin shows the real food photo and its price.</p>
+                </div>
+            </div>
+
+            <div class="bento-tile bento-distance reveal d1">
+                <div class="bento-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+                </div>
+                <h3>How far is it?</h3>
+                <p>Distances show right on each gathering, so you know how long the trip is.</p>
+                <div class="bento-pills">
+                    <span class="dist-pill">850m</span>
+                    <span class="dist-pill">2.4km</span>
+                </div>
+            </div>
+
+            <div class="bento-tile bento-filters reveal d2">
+                <h3>Filter by what you crave</h3>
+                <div class="bento-pills bento-pills-wrap">
+                    <span class="cat-pill cat-on"><svg class="cat-ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg>All</span>
+                    <span class="cat-pill"><svg class="cat-ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 22 16 8"/><path d="M3.47 12.53 5 11l1.53 1.53a3.5 3.5 0 0 1 0 4.94L5 19l-1.53-1.53a3.5 3.5 0 0 1 0-4.94Z"/><path d="M7.47 8.53 9 7l1.53 1.53a3.5 3.5 0 0 1 0 4.94L9 15l-1.53-1.53a3.5 3.5 0 0 1 0-4.94Z"/><path d="M11.47 4.53 13 3l1.53 1.53a3.5 3.5 0 0 1 0 4.94L13 11l-1.53-1.53a3.5 3.5 0 0 1 0-4.94Z"/><path d="M20 2h2v2a4 4 0 0 1-4 4h-2V6a4 4 0 0 1 4-4Z"/><path d="M11.47 17.47 13 19l-1.53 1.53a3.5 3.5 0 0 1-4.94 0L5 19l1.53-1.53a3.5 3.5 0 0 1 4.94 0Z"/><path d="M15.47 13.47 17 15l-1.53 1.53a3.5 3.5 0 0 1-4.94 0L9 15l1.53-1.53a3.5 3.5 0 0 1 4.94 0Z"/><path d="M19.47 9.47 21 11l-1.53 1.53a3.5 3.5 0 0 1-4.94 0L13 11l1.53-1.53a3.5 3.5 0 0 1 4.94 0Z"/></svg>Rice Dishes</span>
+                    <span class="cat-pill"><svg class="cat-ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21a9 9 0 0 0 9-9H3a9 9 0 0 0 9 9Z"/><path d="M7 21h10"/><path d="M19.5 12 22 6"/><path d="M16.25 3c.27.1.8.53.75 1.36-.06.83-.93 1.2-1 2.02-.05.78.34 1.24.73 1.62"/><path d="M11.25 3c.27.1.8.53.74 1.36-.05.83-.93 1.2-.98 2.02-.06.78.33 1.24.72 1.62"/><path d="M6.25 3c.27.1.8.53.75 1.36-.06.83-.93 1.2-1 2.02-.05.78.34 1.24.74 1.62"/></svg>Soups &amp; Stews</span>
+                    <span class="cat-pill"><svg class="cat-ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3q1 4 4 6.5t3 5.5a1 1 0 0 1-14 0 5 5 0 0 1 1-3 1 1 0 0 0 5 0c0-2-1.5-3-1.5-5q0-2 2.5-4"/></svg>Grills &amp; Kebabs</span>
+                    <span class="cat-pill"><svg class="cat-ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 12c.94-3.46 4.94-6 8.5-6 3.56 0 6.06 2.54 7 6-.94 3.47-3.44 6-7 6s-7.56-2.53-8.5-6Z"/><path d="M18 12v.5"/><path d="M16 17.93a9.77 9.77 0 0 1 0-11.86"/><path d="M7 10.67C7 8 5.58 5.97 2.73 5.5c-1 1.5-1 5 .23 6.5-1.24 1.5-1.24 5-.23 6.5C5.58 18.03 7 16 7 13.33"/><path d="M10.46 7.26C10.2 5.88 9.17 4.24 8 3h5.8a2 2 0 0 1 1.98 1.67l.23 1.4"/><path d="m16.01 17.93-.23 1.4A2 2 0 0 1 13.8 21H9.5a5.96 5.96 0 0 0 1.49-3.98"/></svg>Seafood</span>
+                    <span class="cat-pill"><svg class="cat-ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-8a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8"/><path d="M4 16s.5-1 2-1 2.5 2 4 2 2.5-2 4-2 2.5 2 4 2 2-1 2-1"/><path d="M2 21h20"/><path d="M7 8v3"/><path d="M12 8v3"/><path d="M17 8v3"/><path d="M7 4h.01"/><path d="M12 4h.01"/><path d="M17 4h.01"/></svg>Pastries</span>
+                    <span class="cat-pill"><svg class="cat-ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>Vegan</span>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Download Section -->
     <section id="download" class="cta-banner">
-        <h2>Ready to join the community?</h2>
-        <p>Whether you're looking to order a delicious homemade lunch or start selling your own meals, YenDidii is the
-            platform for you.</p>
-        <div class="download-buttons">
-            <a href="#" class="btn-white">Download for iOS</a>
-            <a href="#" class="btn-outline-white">Download for Android</a>
+        <div class="reveal">
+            <h2>Ready to pull up a chair?</h2>
+            <p>Whether you want a seat at someone's table or you'd like to host one of your own, YenDidii is the place to start.</p>
+            <div class="download-buttons">
+                <span class="coming-soon-pill">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M16.37 12.64c-.03-2.7 2.2-4 2.3-4.06-1.25-1.83-3.2-2.08-3.9-2.1-1.66-.17-3.24.98-4.08.98-.85 0-2.15-.96-3.53-.93-1.82.03-3.5 1.06-4.43 2.69-1.9 3.28-.49 8.13 1.36 10.79.9 1.3 1.98 2.76 3.4 2.71 1.36-.05 1.88-.88 3.52-.88 1.65 0 2.11.88 3.55.85 1.47-.02 2.4-1.33 3.3-2.64 1.04-1.51 1.47-2.97 1.49-3.05-.03-.01-2.85-1.09-2.88-4.34zM13.7 4.6c.75-.9 1.25-2.16 1.11-3.4-1.07.04-2.37.71-3.14 1.61-.69.8-1.29 2.08-1.13 3.3 1.2.09 2.42-.61 3.16-1.51z"/></svg>
+                    <span>Coming soon to the App Store</span>
+                </span>
+            </div>
+            <p class="cta-note">Want to hear when we launch? Email us at <a href="mailto:hello@yendidii.com">hello@yendidii.com</a>.</p>
         </div>
     </section>
 
@@ -316,8 +345,7 @@
                     <div class="footer-logo-circle"><img src="assets/logo.png" alt="YenDidii Logo"></div>
                     <h3>Yen<span>Didii</span></h3>
                 </div>
-                <p>The premier foodsharing marketplace connecting passionate home hosts and local food lovers in Ghana
-                    and beyond.</p>
+                <p>Home-hosted tables, shared. YenDidii connects guests with hosts for warm, home-cooked dinners in Ghana.</p>
             </div>
             <div class="footer-links">
                 <h4>Explore</h4>
@@ -350,6 +378,32 @@
         </div>
     </footer>
 
+    <script>
+        // Shadow under the menu once you scroll, and a soft fade-in as sections come into view
+        (function () {
+            var nav = document.querySelector('.navbar');
+            var onScroll = function () { if (nav) nav.classList.toggle('scrolled', window.scrollY > 8); };
+            onScroll();
+            window.addEventListener('scroll', onScroll, { passive: true });
+
+            // footer columns come up one after another
+            document.querySelectorAll('.footer-brand, .footer-links').forEach(function (el, i) {
+                el.classList.add('reveal', 'd' + Math.min(i, 3));
+            });
+
+            var items = document.querySelectorAll('.reveal');
+            if (!('IntersectionObserver' in window)) {
+                items.forEach(function (el) { el.classList.add('in'); });
+                return;
+            }
+            var io = new IntersectionObserver(function (entries) {
+                entries.forEach(function (e) {
+                    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+                });
+            }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+            items.forEach(function (el) { io.observe(el); });
+        })();
+    </script>
     <script>
         // Close mobile menu when links are clicked
         document.querySelectorAll('.nav-links a').forEach(link => {

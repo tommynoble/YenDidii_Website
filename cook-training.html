@@ -25,7 +25,7 @@
     <meta name="twitter:image" content="https://yendidii.com/assets/logo.png">
 
     <!-- Theme Color -->
-    <meta name="theme-color" content="#E05D36">
+    <meta name="theme-color" content="#C25327">
 
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
@@ -36,10 +36,10 @@
             --academy-card: rgba(22, 30, 49, 0.7);
             --academy-sidebar-bg: #0f172a;
             --academy-border: rgba(255, 255, 255, 0.08);
-            --academy-border-active: rgba(224, 93, 54, 0.4);
+            --academy-border-active: rgba(194, 83, 39, 0.4);
             --academy-text: #f1f5f9;
             --academy-muted: #94a3b8;
-            --academy-glow: rgba(224, 93, 54, 0.15);
+            --academy-glow: rgba(194, 83, 39, 0.15);
         }
 
         body.academy-mode {
@@ -58,7 +58,7 @@
             position: absolute;
             top: 20%; left: -10%;
             width: 500px; height: 500px;
-            background: radial-gradient(circle, rgba(224,93,54,0.06) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(194, 83, 39,0.06) 0%, transparent 70%);
             filter: blur(60px);
             pointer-events: none;
             z-index: 0;
@@ -110,7 +110,7 @@
             justify-content: center;
             color: #fff;
             font-weight: 800;
-            box-shadow: 0 4px 15px rgba(224, 93, 54, 0.3);
+            box-shadow: 0 4px 15px rgba(194, 83, 39, 0.3);
         }
 
         .academy-brand span {
@@ -243,11 +243,11 @@
         }
 
         .module-item.active {
-            background: rgba(224, 93, 54, 0.08);
+            background: rgba(194, 83, 39, 0.08);
             border-color: var(--academy-border-active);
             color: #ff7849;
             font-weight: 600;
-            box-shadow: 0 4px 20px rgba(224, 93, 54, 0.05);
+            box-shadow: 0 4px 20px rgba(194, 83, 39, 0.05);
         }
 
         .module-item.completed {
@@ -358,9 +358,9 @@
             display: inline-flex;
             align-items: center;
             gap: 0.6rem;
-            background: rgba(224, 93, 54, 0.12);
+            background: rgba(194, 83, 39, 0.12);
             color: #ff7849;
-            border: 1px solid rgba(224, 93, 54, 0.25);
+            border: 1px solid rgba(194, 83, 39, 0.25);
             border-radius: 50px;
             font-size: 0.8rem;
             font-weight: 700;
@@ -408,12 +408,12 @@
         .btn-academy-next {
             background: linear-gradient(135deg, var(--primary) 0%, #ff7849 100%);
             color: #fff;
-            box-shadow: 0 4px 15px rgba(224, 93, 54, 0.2);
+            box-shadow: 0 4px 15px rgba(194, 83, 39, 0.2);
         }
 
         .btn-academy-next:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(224, 93, 54, 0.35);
+            box-shadow: 0 6px 20px rgba(194, 83, 39, 0.35);
         }
 
         .btn-academy-completed {
@@ -463,16 +463,16 @@
 
         .quiz-option:hover {
             border-color: var(--primary);
-            background: rgba(224, 93, 54, 0.02);
+            background: rgba(194, 83, 39, 0.02);
             color: #fff;
         }
 
         .quiz-option.selected {
             border-color: var(--primary);
-            background: rgba(224, 93, 54, 0.08);
+            background: rgba(194, 83, 39, 0.08);
             color: #fff;
             font-weight: 600;
-            box-shadow: 0 0 15px rgba(224,93,54,0.05);
+            box-shadow: 0 0 15px rgba(194, 83, 39,0.05);
         }
 
         .quiz-radio {
@@ -633,7 +633,7 @@
                 <div class="progress-ring-container">
                     <svg width="130" height="130" viewBox="0 0 120 120">
                         <circle cx="60" cy="60" r="50" fill="transparent" stroke="rgba(255,255,255,0.03)" stroke-width="8"/>
-                        <circle cx="60" cy="60" r="50" fill="transparent" stroke="#E05D36" stroke-width="8" 
+                        <circle cx="60" cy="60" r="50" fill="transparent" stroke="#C25327" stroke-width="8" 
                                 stroke-dasharray="314.15" stroke-dashoffset="314.15" id="progress-ring-fill"
                                 transform="rotate(-90 60 60)" style="transition: stroke-dashoffset 0.4s cubic-bezier(0.4, 0, 0.2, 1);"/>
                     </svg>
@@ -1082,14 +1082,14 @@
                     angle: 60,
                     spread: 60,
                     origin: { x: 0 },
-                    colors: ['#E05D36', '#2E7D32', '#FFB300']
+                    colors: ['#C25327', '#2E7D32', '#FFB300']
                 });
                 confetti({
                     particleCount: 4,
                     angle: 120,
                     spread: 60,
                     origin: { x: 1 },
-                    colors: ['#E05D36', '#2E7D32', '#FFB300']
+                    colors: ['#C25327', '#2E7D32', '#FFB300']
                 });
 
                 if (Date.now() < end) {
